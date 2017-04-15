@@ -1,0 +1,10 @@
+﻿<common:BootStrapper
+    x:Class="WinMasto.App"
+    xmlns:common="using:Template10.Common"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinMasto">
+    <Application.Resources>
+        
+    </Application.Resources>
+</common:BootStrapper>

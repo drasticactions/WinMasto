@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:WinMasto.ViewModels"
+    xmlns:entities="using:Mastonet.Entities"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -43,12 +44,48 @@
         </Grid>
         <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center">
             <ListView ItemsSource="{Binding Statuses}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        
+                    <DataTemplate x:DataType="entities:Status">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="50" Source="{Binding Account.AvatarUrl}"/>
+                                <Grid Margin="5" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Account.UserName}" FontWeight="Bold" />
+                                        <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
+                                        <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Rectangle Margin="5" Grid.Row="1"  Fill="Gray"/>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </Grid>
 </Page>
+

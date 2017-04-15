@@ -12,6 +12,8 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter" />
+            <converters:AddAtSignConverter x:Key="AddAtSignConverter" />
+            <converters:CreatedTimeConverter x:Key="CreatedTimeConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

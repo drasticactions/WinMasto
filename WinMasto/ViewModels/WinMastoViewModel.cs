@@ -49,7 +49,9 @@ namespace WinMasto.ViewModels
         {
             var appRegistration = SettingsService.Instance.AppRegistrationService;
             var userAuth = SettingsService.Instance.UserAuth;
+            var instance = SettingsService.Instance.ServerInstance;
             if (appRegistration == null || userAuth == null) return;
+            appRegistration.Instance = instance;
             Client = new MastodonClient(appRegistration, userAuth.AccessToken);
             UserAccount = SettingsService.Instance.UserAccount;
             IsLoggedIn = true;

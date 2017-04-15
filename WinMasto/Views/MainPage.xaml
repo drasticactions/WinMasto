@@ -42,7 +42,13 @@
             <Button Grid.Row="2" HorizontalAlignment="Center" Click="{x:Bind ViewModel.NavigateToLoginView}" Content="Go to Login Page"/>
         </Grid>
         <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center">
-            
+            <ListView ItemsSource="{Binding Statuses}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

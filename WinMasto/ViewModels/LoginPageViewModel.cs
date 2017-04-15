@@ -78,6 +78,7 @@ namespace WinMasto.ViewModels
                     client = new MastodonClient(appRegistration, auth.AccessToken);
                     var account = await client.GetCurrentUser();
                     SettingsService.UserAccount = account;
+                    SettingsService.Instance.ServerInstance = Server;
                     IsLoggedIn = true;
 
                     if (App.IsTenFoot)

@@ -64,6 +64,15 @@ namespace WinMasto.Services
             }
         }
 
+        public string ServerInstance
+        {
+            get { return _helper.Read<string>(nameof(ServerInstance), ""); }
+            set
+            {
+                _helper.Write(nameof(ServerInstance), value);
+            }
+        }
+
         public bool BackgroundEnable
         {
             get { return _helper.Read<bool>(nameof(BackgroundEnable), false); }

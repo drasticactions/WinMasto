@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
+using Mastonet.Entities;
+using Newtonsoft.Json;
 using Template10.Utils;
 using WinMasto.BackgroundTasks;
+using Application = Windows.UI.Xaml.Application;
 
 namespace WinMasto.Services
 {
@@ -17,6 +20,48 @@ namespace WinMasto.Services
         private SettingsService()
         {
             _helper = new Template10.Services.SettingsService.SettingsHelper();
+        }
+
+        public AppRegistration AppRegistrationService
+        {
+            get
+            {
+                var app = _helper.Read<string>(nameof(AppRegistrationService), null);
+                if (string.IsNullOrEmpty(app)) return null;
+                return JsonConvert.DeserializeObject<AppRegistration>(app);
+            }
+            set
+            {
+                _helper.Write(nameof(AppRegistrationService), JsonConvert.SerializeObject(value));
+            }
+        }
+
+        public Account UserAccount
+        {
+            get
+            {
+                var app = _helper.Read<string>(nameof(UserAccount), null);
+                if (string.IsNullOrEmpty(app)) return null;
+                return JsonConvert.DeserializeObject<Account>(app);
+            }
+            set
+            {
+                _helper.Write(nameof(UserAccount), JsonConvert.SerializeObject(value));
+            }
+        }
+
+        public Auth UserAuth
+        {
+            get
+            {
+                var app = _helper.Read<string>(nameof(UserAuth), null);
+                if (string.IsNullOrEmpty(app)) return null;
+                return JsonConvert.DeserializeObject<Auth>(app);
+            }
+            set
+            {
+                _helper.Write(nameof(UserAuth), JsonConvert.SerializeObject(value));
+            }
         }
 
         public bool BackgroundEnable

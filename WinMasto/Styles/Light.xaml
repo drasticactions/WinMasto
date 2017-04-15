@@ -1,0 +1,7 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinMasto.Styles">
+    <SolidColorBrush x:Key="MainPageBackground" Color="#E5E5E5"/>
+    <Color x:Key="LoadingBackground">#FFFFFF</Color>
+</ResourceDictionary>

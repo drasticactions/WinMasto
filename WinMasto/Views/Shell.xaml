@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="WinMasto.Views.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinMasto.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:WinMasto.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModels:ShellViewModel />
+    </Page.DataContext>
+    <controls:HamburgerMenu x:Name="MyHamburgerMenu" 
+                            SecondaryButtonOrientation="Vertical"
+                            AccentColor="{ThemeResource SystemAccentColor}"
+                            VisualStateNarrowMinWidth="320"
+                            VisualStateNormalMinWidth="720">
+        <controls:HamburgerMenu.PrimaryButtons>
+            <controls:HamburgerButtonInfo ClearHistory="True" PageType="local:MainPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Home" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Home" />
+                </StackPanel>
+            </controls:HamburgerButtonInfo>
+
+        </controls:HamburgerMenu.PrimaryButtons>
+        <controls:HamburgerMenu.SecondaryButtons>
+            <!-- login button -->
+            <controls:HamburgerButtonInfo x:Name="LoginButton" PageType="local:LoginPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Contact" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Account" />
+                </StackPanel>
+            </controls:HamburgerButtonInfo>
+            <!-- settings button -->
+            <controls:HamburgerButtonInfo PageType="local:SettingsPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Setting" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Settings" />
+                </StackPanel>
+            </controls:HamburgerButtonInfo>
+
+        </controls:HamburgerMenu.SecondaryButtons>
+    </controls:HamburgerMenu>
+</Page>

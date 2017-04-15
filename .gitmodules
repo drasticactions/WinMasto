@@ -1,0 +1,3 @@
+[submodule "Mastonet"]
+	path = Mastonet
+	url = git@github.com:drasticactions/Mastonet.git

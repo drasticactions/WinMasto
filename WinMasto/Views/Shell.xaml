@@ -28,7 +28,16 @@
                                Text="Home" />
                 </StackPanel>
             </controls:HamburgerButtonInfo>
-
+            <controls:HamburgerButtonInfo ClearHistory="True" PageType="local:PublicPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="World" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Public" />
+                </StackPanel>
+            </controls:HamburgerButtonInfo>
         </controls:HamburgerMenu.PrimaryButtons>
         <controls:HamburgerMenu.SecondaryButtons>
             <controls:HamburgerButtonInfo IsEnabled="{Binding IsLoggedIn}" x:Name="StatusButton" PageType="local:NewStatusPage">

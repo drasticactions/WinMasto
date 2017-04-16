@@ -31,6 +31,7 @@ namespace WinMasto.ViewModels
                 //_timelineStreaming.Start();
                 var statuses = await Client.GetHomeTimeline();
                 Statuses.AddRange(statuses);
+                RaisePropertyChanged("Statuses");
             }
             IsLoading = false;
         }

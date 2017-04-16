@@ -58,5 +58,13 @@ namespace WinMasto.Views
             var status = menuFlyoutItem?.CommandParameter as Status;
             await ViewModel.ReportOption(status);
         }
+
+        private async void Favorite_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.FavoriteOption(status);
+        }
     }
 }

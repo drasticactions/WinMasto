@@ -87,6 +87,32 @@ namespace WinMasto.ViewModels
 
         }
 
+        public async Task FavoriteOption(Status status)
+        {
+            // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.
+            // It would make more sense to replace the status object in the list with the one it gets from the API
+            // But it's not updating, because OnPropertyChanged is not in Status...
+            Status newStatus;
+            if (status.Favourited == null)
+            {
+                newStatus = await Client.Favourite(status.Id);
+            }
+            else
+            {
+                var favorite = !status.Favourited.Value;
+                if (favorite)
+                {
+                    newStatus = await Client.Favourite(status.Id);
+                }
+                else
+                {
+                    newStatus = await Client.Unfavourite(status.Id);
+                }
+            }
+            var index = Statuses.IndexOf(status);
+            Statuses[index] = newStatus;
+        }
+
         public async Task NavigateToLoginView()
         {
             await NavigationService.NavigateAsync(typeof(LoginPage));

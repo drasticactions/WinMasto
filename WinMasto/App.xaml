@@ -15,6 +15,7 @@
             <converters:AddAtSignConverter x:Key="AddAtSignConverter" />
             <converters:CreatedTimeConverter x:Key="CreatedTimeConverter" />
             <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
+            <converters:CountVisibilityConverter x:Key="CountVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

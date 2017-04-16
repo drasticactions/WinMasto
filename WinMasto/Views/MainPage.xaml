@@ -86,13 +86,27 @@
                                             <uwp:FontAwesome Icon="Reply" />
                                         </Button>
                                         <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                                            <SymbolIcon Symbol="ReShare"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <SymbolIcon Symbol="ReShare"/>
+                                                <TextBlock Margin="5,0,0,0" Visibility="{Binding ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding ReblogCount}"></TextBlock>
+                                            </StackPanel>
                                         </Button>
                                         <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                                            <uwp:FontAwesome Icon="Star" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <uwp:FontAwesome Icon="Star" />
+                                                <TextBlock Margin="5,0,0,0" Visibility="{Binding FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
+                                            </StackPanel>
                                         </Button>
                                         <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                             <SymbolIcon Symbol="More"/>
+                                            <Button.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Text="Mention"/>
+                                                    <MenuFlyoutItem Text="Mute"/>
+                                                    <MenuFlyoutItem Text="Block"/>
+                                                    <MenuFlyoutItem Text="Report"/>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
                                         </Button>
                                     </StackPanel>
                                 </Grid>

@@ -48,14 +48,9 @@
             <Button Grid.Row="2" HorizontalAlignment="Center" Click="{x:Bind ViewModel.NavigateToLoginView}" Content="Go to Login Page"/>
         </Grid>
         <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Stretch">
-            <ListView ItemsSource="{Binding Statuses}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
+            <ListView SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="entities:Status">
+                    <DataTemplate>
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -84,19 +79,19 @@
                                         <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
                                     </Grid>
                                     <Grid Margin="5" Grid.Row="1">
-                                        <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
+                                        <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
                                     </Grid>
                                     <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="2">
-                                        <Button Margin="5,0,25,0" Background="Transparent">
+                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
                                             <uwp:FontAwesome Icon="Reply" />
                                         </Button>
-                                        <Button Margin="0,0,25,0" Background="Transparent">
+                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                             <SymbolIcon Symbol="ReShare"/>
                                         </Button>
-                                        <Button Margin="0,0,25,0" Background="Transparent">
-                                           <uwp:FontAwesome Icon="Star" />
+                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                            <uwp:FontAwesome Icon="Star" />
                                         </Button>
-                                        <Button Margin="0,0,25,0" Background="Transparent">
+                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                             <SymbolIcon Symbol="More"/>
                                         </Button>
                                     </StackPanel>

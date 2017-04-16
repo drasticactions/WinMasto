@@ -17,6 +17,7 @@
             <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter" />
             <converters:FavoriteIconConverter x:Key="FavoriteIconConverter" />
+            <converters:ImageGalleryVisibilityConverter x:Key="ImageGalleryVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

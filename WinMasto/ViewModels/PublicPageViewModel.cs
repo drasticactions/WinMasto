@@ -24,7 +24,7 @@ namespace WinMasto.ViewModels
             if (IsLoggedIn)
             {
                 Statuses = new ObservableCollection<Status>();
-                //_timelineStreaming = Client.GetUserStreaming();
+                //_timelineStreaming = Client.GetPublicStreaming();
                 //_timelineStreaming.OnUpdate += TimelineStreamingOnUpdate;
                 //_timelineStreaming.OnDelete += TimelineStreamingOnDelete;
                 //_timelineStreaming.OnNotification += TimelineStreamingOnNotification;
@@ -48,7 +48,5 @@ namespace WinMasto.ViewModels
 
             return base.OnNavigatingFromAsync(args);
         }
-
-        
     }
 }

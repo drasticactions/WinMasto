@@ -36,21 +36,6 @@ namespace WinMasto.ViewModels
             IsLoading = false;
         }
 
-        private void TimelineStreamingOnNotification(object sender, StreamNotificationEventArgs streamNotificationEventArgs)
-        {
-            
-        }
-
-        private void TimelineStreamingOnDelete(object sender, StreamDeleteEventArgs streamDeleteEventArgs)
-        {
-            
-        }
-
-        private void TimelineStreamingOnUpdate(object sender, StreamUpdateEventArgs streamUpdateEventArgs)
-        {
-           
-        }
-
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
         {
             if (IsLoggedIn)

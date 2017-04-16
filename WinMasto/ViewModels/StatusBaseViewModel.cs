@@ -12,23 +12,24 @@ namespace WinMasto.ViewModels
 {
     public class StatusBaseViewModel : WinMastoViewModel
     {
-        private TimelineStreaming _timelineStreaming;
+        internal TimelineStreaming _timelineStreaming;
 
         public ObservableCollection<Status> Statuses { get; set; }
 
-        private void TimelineStreamingOnNotification(object sender, StreamNotificationEventArgs streamNotificationEventArgs)
+        internal void TimelineStreamingOnNotification(object sender, StreamNotificationEventArgs streamNotificationEventArgs)
         {
 
         }
 
-        private void TimelineStreamingOnDelete(object sender, StreamDeleteEventArgs streamDeleteEventArgs)
+        internal void TimelineStreamingOnDelete(object sender, StreamDeleteEventArgs streamDeleteEventArgs)
         {
 
         }
 
-        private void TimelineStreamingOnUpdate(object sender, StreamUpdateEventArgs streamUpdateEventArgs)
+        internal void TimelineStreamingOnUpdate(object sender, StreamUpdateEventArgs streamUpdateEventArgs)
         {
-
+            Statuses.Add(streamUpdateEventArgs.Status);
+            RaisePropertyChanged("Statuses");
         }
 
         public async Task ReplyOption(Status status)

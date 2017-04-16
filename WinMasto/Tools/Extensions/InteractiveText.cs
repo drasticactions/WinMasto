@@ -134,6 +134,7 @@ namespace WinMasto.Tools.Extensions
                 {
                     string rawText = e.NewValue as string;
                     var textBlock = sender as TextBlock;
+                    if (textBlock != null) textBlock.Text = string.Empty;
                     if (string.IsNullOrEmpty(rawText)) return;
 
 

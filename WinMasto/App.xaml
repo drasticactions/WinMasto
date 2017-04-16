@@ -16,6 +16,7 @@
             <converters:CreatedTimeConverter x:Key="CreatedTimeConverter" />
             <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter" />
+            <converters:FavoriteIconConverter x:Key="FavoriteIconConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

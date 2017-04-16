@@ -103,6 +103,7 @@
     <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />
     <Compile Include="Tools\Converters\CountVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\CreatedTimeConverter.cs" />
+    <Compile Include="Tools\Converters\FavoriteIconConverter.cs" />
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />

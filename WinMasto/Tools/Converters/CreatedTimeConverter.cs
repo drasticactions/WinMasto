@@ -13,7 +13,7 @@ namespace WinMasto.Tools.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var accountDateTime = (DateTime) value;
-            var timespan = DateTime.Now.Subtract(accountDateTime);
+            var timespan = DateTime.UtcNow.Subtract(accountDateTime);
             return timespan.ToPrettyString(2, UnitStringRepresentation.Compact);
         }
 

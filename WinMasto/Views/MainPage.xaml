@@ -9,6 +9,7 @@
     xmlns:entities="using:Mastonet.Entities"
     xmlns:extensions="using:WinMasto.Tools.Extensions"
     xmlns:controls="using:Template10.Controls"
+    xmlns:communitycontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:uwp="using:FontAwesome.UWP"
     mc:Ignorable="d">
     <Page.Transitions>
@@ -83,7 +84,27 @@
                                         <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
                                     </Grid>
                                     <Grid Visibility="{Binding MediaAttachments, Converter={StaticResource ImageGalleryVisibilityConverter}}" Margin="5" Grid.Row="2">
-                                        <TextBlock>Test</TextBlock>
+                                        <communitycontrols:AdaptiveGridView 
+                                            OneRowModeEnabled="False"
+                                            ItemHeight="100"
+                                            DesiredWidth="100"
+                                            ItemsSource="{Binding MediaAttachments}">
+                                            <communitycontrols:AdaptiveGridView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid
+                                                        Background="White"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="1">
+                                                        <Image
+                                                            Source="{Binding PreviewUrl}"
+                                                            Stretch="UniformToFill"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"/>
+                                                    </Grid>
+
+                                                </DataTemplate>
+                                            </communitycontrols:AdaptiveGridView.ItemTemplate>
+                                        </communitycontrols:AdaptiveGridView>
                                     </Grid>
                                     <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="3">
                                         <Button Click="Reply_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">

@@ -25,10 +25,20 @@
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <TextBox Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
-                <Button Click="{x:Bind ViewModel.SendStatus}" Content="TOOT!"/>
+        <TextBox Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
+        <Grid Margin="5" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Button Style="{StaticResource StatusButtonStyle}">
+                    <SymbolIcon Symbol="Camera"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0" Text="{Binding StatusCount, Mode=TwoWay}"/>
+                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Click="{x:Bind ViewModel.SendStatus}" Content="TOOT!"/>
             </StackPanel>
         </Grid>
     </Grid>

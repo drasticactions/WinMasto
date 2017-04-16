@@ -74,5 +74,13 @@ namespace WinMasto.Views
             var status = button?.CommandParameter as Status;
             await ViewModel.ReShareOption(status);
         }
+
+        private async void Reply_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.ReplyOption(status);
+        }
     }
 }

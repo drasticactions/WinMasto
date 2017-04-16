@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Mastonet;
 using Mastonet.Entities;
@@ -20,10 +21,31 @@ namespace WinMasto.ViewModels
             IsLoading = false;
         }
 
-        private string _status;
+        private string _status = "";
 
-        public string Status { get => _status;
-            set => Set(ref _status, value);
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                Set(ref _status, value);
+            }
+        }
+
+        private int _statusCount = 500;
+
+        public int StatusCount
+        {
+            get { return _statusCount; }
+            set
+            {
+                Set(ref _statusCount, value);
+            }
+        }
+
+        public void StatusTextBox_OnChanged(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            StatusCount = 500 - sender.Text.Length;
         }
 
         public async Task SendStatus()

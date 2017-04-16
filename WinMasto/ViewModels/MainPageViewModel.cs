@@ -33,8 +33,8 @@ namespace WinMasto.ViewModels
                 //_timelineStreaming.OnDelete += TimelineStreamingOnDelete;
                 //_timelineStreaming.OnNotification += TimelineStreamingOnNotification;
                 //_timelineStreaming.Start();
-                var statuses = await Client.GetHomeTimeline();
-                Statuses.AddRange(statuses);
+                //var statuses = await Client.GetHomeTimeline();
+                //Statuses.AddRange(statuses);
             }
             IsLoading = false;
         }
@@ -65,6 +65,11 @@ namespace WinMasto.ViewModels
             }
 
             return base.OnNavigatingFromAsync(args);
+        }
+
+        public async Task ReplyOption(Status status)
+        {
+
         }
 
         public async Task MentionOption(Status status)

@@ -82,7 +82,7 @@
                                         <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
                                     </Grid>
                                     <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="2">
-                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
+                                        <Button Click="Reply_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
                                             <uwp:FontAwesome Icon="Reply" />
                                         </Button>
                                         <Button Click="ReShare_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">

@@ -31,6 +31,12 @@
 
         </controls:HamburgerMenu.PrimaryButtons>
         <controls:HamburgerMenu.SecondaryButtons>
+            <controls:HamburgerButtonInfo IsEnabled="{Binding IsLoggedIn}" x:Name="StatusButton" PageType="local:NewStatusPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Edit" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="New Status" />
+                </StackPanel>
+            </controls:HamburgerButtonInfo>
             <!-- login button -->
             <controls:HamburgerButtonInfo x:Name="LoginButton" PageType="local:LoginPage">
                 <StackPanel Orientation="Horizontal">

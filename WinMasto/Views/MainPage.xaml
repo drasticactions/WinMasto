@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:WinMasto.ViewModels"
     xmlns:entities="using:Mastonet.Entities"
+    xmlns:extensions="using:WinMasto.Tools.Extensions"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:uwp="using:FontAwesome.UWP"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -26,13 +29,15 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="Home Timeline" Frame="{x:Bind Frame}">
+        </controls:PageHeader>
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>
                 <SolidColorBrush Opacity=".9" Color="{ThemeResource LoadingBackground}"></SolidColorBrush>
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityInverter}}" VerticalAlignment="Center">
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityInverter}}" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -42,7 +47,7 @@
             <TextBlock Grid.Row="1" FontSize="25" FontWeight="Thin" Margin="0,10,0,25" TextAlignment="Center" Text="WinMastro"/>
             <Button Grid.Row="2" HorizontalAlignment="Center" Click="{x:Bind ViewModel.NavigateToLoginView}" Content="Go to Login Page"/>
         </Grid>
-        <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center">
+        <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Stretch">
             <ListView ItemsSource="{Binding Statuses}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -61,7 +66,7 @@
                                     <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Height="50" Source="{Binding Account.AvatarUrl}"/>
+                                <Image VerticalAlignment="Top" Height="50" Source="{Binding Account.AvatarUrl}"/>
                                 <Grid Margin="5" Grid.Column="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -78,9 +83,26 @@
                                         <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
                                         <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
                                     </Grid>
+                                    <Grid Margin="5" Grid.Row="1">
+                                        <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
+                                    </Grid>
+                                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="2">
+                                        <Button Margin="5,0,25,0" Background="Transparent">
+                                            <uwp:FontAwesome Icon="Reply" />
+                                        </Button>
+                                        <Button Margin="0,0,25,0" Background="Transparent">
+                                            <SymbolIcon Symbol="ReShare"/>
+                                        </Button>
+                                        <Button Margin="0,0,25,0" Background="Transparent">
+                                           <uwp:FontAwesome Icon="Star" />
+                                        </Button>
+                                        <Button Margin="0,0,25,0" Background="Transparent">
+                                            <SymbolIcon Symbol="More"/>
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                             </Grid>
-                            <Rectangle Margin="5" Grid.Row="1"  Fill="Gray"/>
+                            <Rectangle Grid.Row="1"  Fill="Gray"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

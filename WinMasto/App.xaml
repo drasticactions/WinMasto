@@ -14,6 +14,7 @@
             <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter" />
             <converters:AddAtSignConverter x:Key="AddAtSignConverter" />
             <converters:CreatedTimeConverter x:Key="CreatedTimeConverter" />
+            <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

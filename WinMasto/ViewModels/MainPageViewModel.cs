@@ -26,11 +26,11 @@ namespace WinMasto.ViewModels
             if (IsLoggedIn)
             {
                 Statuses = new ObservableCollection<Status>();
-                _timelineStreaming = Client.GetUserStreaming();
-                _timelineStreaming.OnUpdate += TimelineStreamingOnUpdate;
-                _timelineStreaming.OnDelete += TimelineStreamingOnDelete;
-                _timelineStreaming.OnNotification += TimelineStreamingOnNotification;
-                _timelineStreaming.Start();
+                //_timelineStreaming = Client.GetUserStreaming();
+                //_timelineStreaming.OnUpdate += TimelineStreamingOnUpdate;
+                //_timelineStreaming.OnDelete += TimelineStreamingOnDelete;
+                //_timelineStreaming.OnNotification += TimelineStreamingOnNotification;
+                //_timelineStreaming.Start();
                 var statuses = await Client.GetHomeTimeline();
                 Statuses.AddRange(statuses);
             }
@@ -56,10 +56,10 @@ namespace WinMasto.ViewModels
         {
             if (IsLoggedIn)
             {
-                _timelineStreaming.OnUpdate -= TimelineStreamingOnUpdate;
-                _timelineStreaming.OnDelete -= TimelineStreamingOnDelete;
-                _timelineStreaming.OnNotification -= TimelineStreamingOnNotification;
-                _timelineStreaming.Stop();
+                //_timelineStreaming.OnUpdate -= TimelineStreamingOnUpdate;
+                //_timelineStreaming.OnDelete -= TimelineStreamingOnDelete;
+                //_timelineStreaming.OnNotification -= TimelineStreamingOnNotification;
+                //_timelineStreaming.Stop();
             }
 
             return base.OnNavigatingFromAsync(args);

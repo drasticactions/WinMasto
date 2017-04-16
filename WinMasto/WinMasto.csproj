@@ -102,6 +102,8 @@
     <Compile Include="Tools\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />
     <Compile Include="Tools\Converters\CreatedTimeConverter.cs" />
+    <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
+    <Compile Include="Tools\Extensions\InteractiveText.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
@@ -189,6 +191,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FontAwesome.UWP">
+      <Version>4.7.0.9</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
       <Version>1.1.1</Version>
     </PackageReference>

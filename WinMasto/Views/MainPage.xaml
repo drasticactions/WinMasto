@@ -85,7 +85,7 @@
                                         <Button Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
                                             <uwp:FontAwesome Icon="Reply" />
                                         </Button>
-                                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                        <Button Click="ReShare_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                             <StackPanel Orientation="Horizontal">
                                                 <SymbolIcon Symbol="ReShare"/>
                                                 <TextBlock Margin="5,0,0,0" Visibility="{Binding ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding ReblogCount}"></TextBlock>

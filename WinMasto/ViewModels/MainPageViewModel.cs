@@ -87,6 +87,39 @@ namespace WinMasto.ViewModels
 
         }
 
+        public async Task ReShareOption(Status status)
+        {
+            // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.
+            // It would make more sense to replace the status object in the list with the one it gets from the API
+            // But it's not updating, because OnPropertyChanged is not in Status...
+            // Reblog returns "reblogged" status, not the original status updated.
+            Status newStatus = status;
+            if (status.Reblogged == null)
+            {
+                await Client.Reblog(status.Id);
+                newStatus.Reblogged = true;
+                newStatus.ReblogCount = newStatus.ReblogCount + 1;
+            }
+            else
+            {
+                var reblogged = !status.Reblogged.Value;
+                if (reblogged)
+                {
+                    await Client.Reblog(status.Id);
+                    newStatus.Reblogged = true;
+                    newStatus.ReblogCount = newStatus.ReblogCount + 1;
+                }
+                else
+                {
+                    await Client.Unreblog(status.Id);
+                    newStatus.Reblogged = false;
+                    newStatus.ReblogCount = newStatus.ReblogCount - 1;
+                }
+            }
+            var index = Statuses.IndexOf(status);
+            Statuses[index] = newStatus;
+        }
+
         public async Task FavoriteOption(Status status)
         {
             // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.

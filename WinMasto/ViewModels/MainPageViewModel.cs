@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Mastonet;
 using Mastonet.Entities;
@@ -63,6 +65,26 @@ namespace WinMasto.ViewModels
             }
 
             return base.OnNavigatingFromAsync(args);
+        }
+
+        public async Task MentionOption(Status status)
+        {
+            
+        }
+
+        public async Task BlockOption(Status status)
+        {
+
+        }
+
+        public async Task MuteOption(Status status)
+        {
+
+        }
+
+        public async Task ReportOption(Status status)
+        {
+
         }
 
         public async Task NavigateToLoginView()

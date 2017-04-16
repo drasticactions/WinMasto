@@ -101,10 +101,10 @@
                                             <SymbolIcon Symbol="More"/>
                                             <Button.Flyout>
                                                 <MenuFlyout>
-                                                    <MenuFlyoutItem Text="Mention"/>
-                                                    <MenuFlyoutItem Text="Mute"/>
-                                                    <MenuFlyoutItem Text="Block"/>
-                                                    <MenuFlyoutItem Text="Report"/>
+                                                    <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
+                                                    <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
+                                                    <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
+                                                    <MenuFlyoutItem Click="Report_OnClick" CommandParameter="{Binding}" Text="Report"/>
                                                 </MenuFlyout>
                                             </Button.Flyout>
                                         </Button>

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Mastonet.Entities;
 using WinMasto.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -29,5 +30,33 @@ namespace WinMasto.Views
         }
 
         public MainPageViewModel ViewModel => this.DataContext as MainPageViewModel;
+
+        private async void Mention_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.MentionOption(status);
+        }
+
+        private async void Mute_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.MuteOption(status);
+        }
+
+        private async void Block_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.BlockOption(status);
+        }
+
+        private async void Report_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.ReportOption(status);
+        }
     }
 }

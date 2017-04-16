@@ -106,7 +106,13 @@ namespace WinMasto.ViewModels
                 }
                 else
                 {
+
+                    // API Bug: Unfavorite returns a status that still says it's favorited, even though it's not.
+                    // Not sure if it's mastodon, or the instance I'm on. So for now, we'll force it to say it's
+                    // not there.
                     newStatus = await Client.Unfavourite(status.Id);
+                    newStatus.Favourited = false;
+                    newStatus.FavouritesCount = newStatus.FavouritesCount - 1;
                 }
             }
             var index = Statuses.IndexOf(status);

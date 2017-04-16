@@ -108,10 +108,12 @@
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
+    <Compile Include="ViewModels\PublicPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NewStatusPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\StatusBaseViewModel.cs" />
     <Compile Include="ViewModels\WinMastoViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>

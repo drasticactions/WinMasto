@@ -15,7 +15,7 @@ using WinMasto.Views;
 
 namespace WinMasto.ViewModels
 {
-    public class MainPageViewModel : StatusBaseViewModel
+    public class PublicPageViewModel : StatusBaseViewModel
     {
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
@@ -29,25 +29,10 @@ namespace WinMasto.ViewModels
                 //_timelineStreaming.OnDelete += TimelineStreamingOnDelete;
                 //_timelineStreaming.OnNotification += TimelineStreamingOnNotification;
                 //_timelineStreaming.Start();
-                var statuses = await Client.GetHomeTimeline();
+                var statuses = await Client.GetPublicTimeline();
                 Statuses.AddRange(statuses);
             }
             IsLoading = false;
-        }
-
-        private void TimelineStreamingOnNotification(object sender, StreamNotificationEventArgs streamNotificationEventArgs)
-        {
-            
-        }
-
-        private void TimelineStreamingOnDelete(object sender, StreamDeleteEventArgs streamDeleteEventArgs)
-        {
-            
-        }
-
-        private void TimelineStreamingOnUpdate(object sender, StreamUpdateEventArgs streamUpdateEventArgs)
-        {
-           
         }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)

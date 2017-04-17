@@ -5,9 +5,51 @@
     xmlns:local="using:WinMasto.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:WinMasto.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Template10.Behaviors"
     mc:Ignorable="d">
-
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.DataContext>
+        <viewModels:SettingsPageViewModel />
+    </Page.DataContext>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  header  -->
+        <controls:PageHeader BackButtonVisibility="Collapsed" Background="{ThemeResource SystemAccentColor}" Foreground="White" Content="Settings" Frame="{x:Bind Frame}">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:EllipsisBehavior Visibility="Collapsed" />
+            </interactivity:Interaction.Behaviors>
+        </controls:PageHeader>
+
+        <!--  #region content  -->
+
+        <Pivot x:Name="MyPivot" Grid.Row="1">
+            <PivotItem Header="App" DataContext="{Binding SettingsPartViewModel}">
+                <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
+                    <RelativePanel HorizontalAlignment="Left">
+                        <ToggleSwitch x:Name="UseDarkThemeToggleSwitch"  Header="Use Light Theme"
+                                      IsOn="{Binding UseDarkThemeButton, Mode=TwoWay}"
+                                      OffContent="Light Theme" OnContent="Dark Theme" />
+                        <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to fully see the changes.</TextBlock>
+                    </RelativePanel>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+        <!--  #endregion  -->
 
     </Grid>
 </Page>

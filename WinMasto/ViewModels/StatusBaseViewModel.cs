@@ -16,22 +16,6 @@ namespace WinMasto.ViewModels
 
         public ObservableCollection<Status> Statuses { get; set; }
 
-        internal void TimelineStreamingOnNotification(object sender, StreamNotificationEventArgs streamNotificationEventArgs)
-        {
-
-        }
-
-        internal void TimelineStreamingOnDelete(object sender, StreamDeleteEventArgs streamDeleteEventArgs)
-        {
-
-        }
-
-        internal void TimelineStreamingOnUpdate(object sender, StreamUpdateEventArgs streamUpdateEventArgs)
-        {
-            Statuses.Add(streamUpdateEventArgs.Status);
-            RaisePropertyChanged("Statuses");
-        }
-
         public async Task ReplyOption(Status status)
         {
 

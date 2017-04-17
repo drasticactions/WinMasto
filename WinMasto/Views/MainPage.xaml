@@ -11,6 +11,7 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:communitycontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:uwp="using:FontAwesome.UWP"
+    xmlns:localcontrols="using:WinMasto.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -48,8 +49,8 @@
             <TextBlock Grid.Row="1" FontSize="25" FontWeight="Thin" Margin="0,10,0,25" TextAlignment="Center" Text="WinMastro"/>
             <Button Grid.Row="2" HorizontalAlignment="Center" Click="{x:Bind ViewModel.NavigateToLoginView}" Content="Go to Login Page"/>
         </Grid>
-        <Grid Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Stretch">
-            <ListView SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
+        <Grid x:Name="StatusGrid" Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Stretch">
+            <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5">
@@ -88,6 +89,8 @@
                                             OneRowModeEnabled="False"
                                             ItemHeight="100"
                                             DesiredWidth="100"
+                                            IsItemClickEnabled="True"
+                                            ItemClick="ImageItem_OnClick"
                                             ItemsSource="{Binding MediaAttachments}">
                                             <communitycontrols:AdaptiveGridView.ItemTemplate>
                                                 <DataTemplate>
@@ -140,6 +143,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <FlyoutBase.AttachedFlyout>
+                <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
+                    <localcontrols:ImageGalleryView x:Name="ImageGalleryView"></localcontrols:ImageGalleryView>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
         </Grid>
     </Grid>
 </Page>

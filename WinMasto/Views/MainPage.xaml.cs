@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using WinMasto.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -81,6 +82,21 @@ namespace WinMasto.Views
             if (button == null) return;
             var status = button?.CommandParameter as Status;
             await ViewModel.ReplyOption(status);
+        }
+
+        private void ImageItem_OnClick(object sender, ItemClickEventArgs e)
+        {
+            var attachment = e.ClickedItem as Attachment;
+            if (attachment == null) return;
+
+            var grid = sender as AdaptiveGridView;
+            if (grid == null) return;
+
+            var status = grid.DataContext as Status;
+            if (status == null) return;
+            ImageGalleryView.ViewModel.SetStatus(status, attachment);
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
+            flyoutBase.ShowAt(StatusGrid);
         }
     }
 }

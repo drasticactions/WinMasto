@@ -276,4 +276,26 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="ImageGalleryFlyoutPresenterStyle" TargetType="FlyoutPresenter">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Background" Value="#88000000"/>
+        <Setter Property="BorderBrush" Value="#88000000"/>
+        <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}"/>
+        <Setter Property="MaxWidth" Value="NaN"/>
+        <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}"/>
+        <Setter Property="MaxHeight" Value="NaN"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="FlyoutPresenter">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

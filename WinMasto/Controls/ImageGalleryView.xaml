@@ -1,0 +1,95 @@
+﻿<UserControl
+    x:Class="WinMasto.Controls.ImageGalleryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinMasto.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:WinMasto.ViewModels"
+    xmlns:extensions="using:WinMasto.Tools.Extensions"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:uwp="using:FontAwesome.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.DataContext>
+        <viewModels:ImageGalleryViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="PictureViewSource" Source="{Binding Status.MediaAttachments}"/>
+    </UserControl.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="600" MaxWidth="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <FlipView ItemsSource="{Binding Status.MediaAttachments}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Stretch="UniformToFill" Source="{Binding Url}" />
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image VerticalAlignment="Top" Height="50" Source="{Binding Status.Account.AvatarUrl}"/>
+                <Grid Margin="5" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Status.Account.UserName}" FontWeight="Bold" />
+                        <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Status.Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
+                        <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding Status.CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
+                    </Grid>
+                    <Grid Margin="5" Grid.Row="1">
+                        <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Status.Content, Converter={StaticResource StripHtmlConverter}}"/>
+                    </Grid>
+                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="3">
+                        <Button CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
+                            <uwp:FontAwesome Icon="Reply" />
+                        </Button>
+                        <Button CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="ReShare"/>
+                                <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.ReblogCount}"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.FavouritesCount}"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                            <SymbolIcon Symbol="More"/>
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Mention"/>
+                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Mute"/>
+                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Block"/>
+                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Report"/>
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+

@@ -96,6 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BackgroundTasks\BackgroundTaskUtils.cs" />
+    <Compile Include="Controls\ImageGalleryView.xaml.cs">
+      <DependentUpon>ImageGalleryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Tools\Converters\AddAtSignConverter.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Tools\Converters\ImageGalleryVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
+    <Compile Include="ViewModels\ImageGalleryViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NewStatusPageViewModel.cs" />
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ImageGalleryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

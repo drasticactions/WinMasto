@@ -108,8 +108,10 @@
     <Compile Include="Tools\Converters\CreatedTimeConverter.cs" />
     <Compile Include="Tools\Converters\FavoriteIconConverter.cs" />
     <Compile Include="Tools\Converters\ImageGalleryVisibilityConverter.cs" />
+    <Compile Include="Tools\Converters\OpenMenuFlyoutAction.cs" />
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
+    <Compile Include="Tools\Files\FileAccessCommands.cs" />
     <Compile Include="ViewModels\ImageGalleryViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

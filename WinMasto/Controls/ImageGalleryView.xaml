@@ -9,6 +9,9 @@
     xmlns:extensions="using:WinMasto.Tools.Extensions"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:uwp="using:FontAwesome.UWP"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converters="using:WinMasto.Tools.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -27,7 +30,21 @@
             <FlipView ItemsSource="{Binding Status.MediaAttachments}">
                 <FlipView.ItemTemplate>
                     <DataTemplate>
-                        <Image Stretch="UniformToFill" Source="{Binding Url}" />
+                        <Image Stretch="UniformToFill" Source="{Binding Url}">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Save" Click="Save_OnClick" CommandParameter="{Binding}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Holding">
+                                    <converters:OpenMenuFlyoutAction />
+                                </core:EventTriggerBehavior>
+                                <core:EventTriggerBehavior EventName="RightTapped">
+                                    <converters:OpenMenuFlyoutAction />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </Image>
                     </DataTemplate>
                 </FlipView.ItemTemplate>
             </FlipView>

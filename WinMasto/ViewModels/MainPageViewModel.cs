@@ -23,13 +23,26 @@ namespace WinMasto.ViewModels
             await LoginUser();
             if (IsLoggedIn)
             {
+                // TODO: Fix core library to allow max_id, since_id
+                // TODO: Seperate this into new class, for doing scrolling lists
                 Statuses = new ObservableCollection<Status>();
-                //_timelineStreaming = Client.GetUserStreaming();
-                //_timelineStreaming.OnUpdate += TimelineStreamingOnUpdate;
-                //_timelineStreaming.OnDelete += TimelineStreamingOnDelete;
-                //_timelineStreaming.OnNotification += TimelineStreamingOnNotification;
-                //_timelineStreaming.Start();
-                var statuses = await Client.GetHomeTimeline();
+                IEnumerable<Status> statuses = new List<Status>();
+                var path = (string) parameter;
+                switch (path)
+                {
+                    case "home":
+                        statuses = await Client.GetHomeTimeline();
+                        break;
+                    case "public":
+                        statuses = await Client.GetPublicTimeline();
+                        break;
+                    case "local":
+                        statuses = await Client.GetPublicTimeline(true);
+                        break;
+                    default:
+                        statuses = await Client.GetHomeTimeline();
+                        break;
+                }
                 Statuses.AddRange(statuses);
                 RaisePropertyChanged("Statuses");
             }
@@ -40,10 +53,6 @@ namespace WinMasto.ViewModels
         {
             if (IsLoggedIn)
             {
-                //_timelineStreaming.OnUpdate -= TimelineStreamingOnUpdate;
-                //_timelineStreaming.OnDelete -= TimelineStreamingOnDelete;
-                //_timelineStreaming.OnNotification -= TimelineStreamingOnNotification;
-                //_timelineStreaming.Stop();
             }
 
             return base.OnNavigatingFromAsync(args);

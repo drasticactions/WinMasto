@@ -47,7 +47,7 @@
                                 Symbol="World" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="Public" />
+                               Text="Federated" />
                 </StackPanel>
             </controls:HamburgerButtonInfo>
         </controls:HamburgerMenu.PrimaryButtons>

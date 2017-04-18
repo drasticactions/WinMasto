@@ -28,18 +28,20 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
         </controls:PageHeader>
-        <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <ProgressBar IsIndeterminate="True" Visibility="{x:Bind ViewModel.Statuses.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
+        <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>
                 <SolidColorBrush Opacity=".9" Color="{ThemeResource LoadingBackground}"></SolidColorBrush>
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <Grid x:Name="StatusGrid" Grid.Row="1" VerticalAlignment="Stretch">
+        <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
             <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

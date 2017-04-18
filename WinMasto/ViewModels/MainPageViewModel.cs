@@ -11,6 +11,7 @@ using Mastonet;
 using Mastonet.Entities;
 using Template10.Services.NavigationService;
 using Template10.Utils;
+using WinMasto.Tools;
 using WinMasto.Views;
 
 namespace WinMasto.ViewModels
@@ -20,33 +21,35 @@ namespace WinMasto.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             IsLoading = true;
+            var path = (string)parameter;
+            SetTitle(path);
             await LoginUser();
             if (IsLoggedIn)
             {
-                // TODO: Fix core library to allow max_id, since_id
-                // TODO: Seperate this into new class, for doing scrolling lists
-                Statuses = new ObservableCollection<Status>();
-                IEnumerable<Status> statuses = new List<Status>();
-                var path = (string) parameter;
-                switch (path)
-                {
-                    case "home":
-                        statuses = await Client.GetHomeTimeline();
-                        break;
-                    case "public":
-                        statuses = await Client.GetPublicTimeline();
-                        break;
-                    case "local":
-                        statuses = await Client.GetPublicTimeline();
-                        break;
-                    default:
-                        statuses = await Client.GetHomeTimeline();
-                        break;
-                }
-                Statuses.AddRange(statuses);
+               
+                Statuses = new TimelineScrollingCollection(Client, path);
                 RaisePropertyChanged("Statuses");
             }
             IsLoading = false;
+        }
+
+        private void SetTitle(string path)
+        {
+            switch (path)
+            {
+                case "home":
+                    Title = "Home Timeline";
+                    break;
+                case "public":
+                    Title = "Federated Timeline";
+                    break;
+                case "local":
+                    Title = "Local Timeline";
+                    break;
+                default:
+                    Title = "Home Timeline";
+                    break;
+            }
         }
 
         public override Task OnNavigatingFromAsync(NavigatingEventArgs args)

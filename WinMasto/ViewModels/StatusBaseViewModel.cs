@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mastonet;
 using Mastonet.Entities;
+using WinMasto.Tools;
 using WinMasto.Views;
 
 namespace WinMasto.ViewModels
@@ -14,7 +15,7 @@ namespace WinMasto.ViewModels
     {
         internal TimelineStreaming _timelineStreaming;
 
-        public ObservableCollection<Status> Statuses { get; set; }
+        public TimelineScrollingCollection Statuses { get; set; }
 
         public async Task ReplyOption(Status status)
         {
@@ -109,6 +110,17 @@ namespace WinMasto.ViewModels
         public async Task NavigateToLoginView()
         {
             await NavigationService.NavigateAsync(typeof(LoginPage));
+        }
+
+        private string _title = string.Empty;
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                Set(ref _title, value);
+            }
         }
     }
 }

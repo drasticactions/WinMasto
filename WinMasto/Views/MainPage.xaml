@@ -39,17 +39,7 @@
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Center" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityInverter}}" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Image Height="150"  Source="/Assets/Images/Icon2.png"/>
-            <TextBlock Grid.Row="1" FontSize="25" FontWeight="Thin" Margin="0,10,0,25" TextAlignment="Center" Text="WinMastro"/>
-            <Button Grid.Row="2" HorizontalAlignment="Center" Click="{x:Bind ViewModel.NavigateToLoginView}" Content="Go to Login Page"/>
-        </Grid>
-        <Grid x:Name="StatusGrid" Grid.Row="1" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Stretch">
+        <Grid x:Name="StatusGrid" Grid.Row="1" VerticalAlignment="Stretch">
             <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

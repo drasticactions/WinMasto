@@ -90,8 +90,16 @@ namespace WinMasto
             //    // If all else fails, go to the main page.
             //    await NavigationService.NavigateAsync(typeof(Views.MainPage));
             //}
-            
-            await NavigationService.NavigateAsync(typeof(Views.MainPage));
+
+            var login = SettingsService.Instance.UserAuth;
+            if (login == null)
+            {
+                await NavigationService.NavigateAsync(typeof(Views.LoginPage));
+            }
+            else
+            {
+                await NavigationService.NavigateAsync(typeof(Views.MainPage));
+            }
         }
 
         public override void OnResuming(object s, object e, BootStrapper.AppExecutionState previousExecutionState)

@@ -37,7 +37,7 @@ namespace WinMasto.ViewModels
                         statuses = await Client.GetPublicTimeline();
                         break;
                     case "local":
-                        statuses = await Client.GetPublicTimeline(true);
+                        statuses = await Client.GetPublicTimeline();
                         break;
                     default:
                         statuses = await Client.GetHomeTimeline();

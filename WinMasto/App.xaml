@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinMasto"
-    xmlns:converters="using:WinMasto.Tools.Converters">
+    xmlns:converters="using:WinMasto.Tools.Converters"
+    xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,6 +24,7 @@
             <converters:SpoilerOrNSFWTextConverter x:Key="SpoilerOrNSFWTextConverter" />
             <converters:SpoilerOrNSFWVisibilityConverter x:Key="SpoilerOrNSFWVisibilityConverter" />
             <converters:ImageGalleryVisibilityConverter x:Key="ImageGalleryVisibilityConverter" />
+            <templateSelector:StatusTemplateSelector x:Key="StatusTemplateSelector"/>
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

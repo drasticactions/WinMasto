@@ -14,6 +14,7 @@
     xmlns:localcontrols="using:WinMasto.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -27,6 +28,116 @@
     <Page.DataContext>
         <viewModels:MainPageViewModel />
     </Page.DataContext>
+    <Page.Resources>
+        <DataTemplate x:Name="RegularStatusDataTemplate">
+            <Grid MaxWidth="700" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Top" Height="50" Source="{Binding Account.AvatarUrl}"/>
+                    <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#96000000" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>
+                            <Button CommandParameter="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Click="ShowNSFWPost_OnClick" Content="Show"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid x:Name="StatusGrid" Margin="5" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Account.UserName}" FontWeight="Bold" />
+                                <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
+                                <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
+                            </Grid>
+                            <Grid Margin="5" Grid.Row="1">
+                                <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
+                            </Grid>
+                            <Grid Visibility="{Binding MediaAttachments, Converter={StaticResource ImageGalleryVisibilityConverter}}" Margin="5" Grid.Row="2">
+                                <communitycontrols:AdaptiveGridView 
+                                    OneRowModeEnabled="False"
+                                    ItemHeight="100"
+                                    DesiredWidth="100"
+                                    IsItemClickEnabled="True"
+                                    ItemClick="ImageItem_OnClick"
+                                    ItemsSource="{Binding MediaAttachments}">
+                                    <communitycontrols:AdaptiveGridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid
+                                                Background="White"
+                                                BorderBrush="Black"
+                                                BorderThickness="1">
+                                                <Image
+                                                    Source="{Binding PreviewUrl}"
+                                                    Stretch="UniformToFill"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </communitycontrols:AdaptiveGridView.ItemTemplate>
+                                </communitycontrols:AdaptiveGridView>
+                            </Grid>
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:Blur x:Name="SpoilerBlur"
+                                                Value="{Binding Converter={StaticResource SpoilerOrNSFWConverter}}"
+                                                Duration="500"
+                                                Delay="0"
+                                                AutomaticallyStart="True"/>
+                            </interactivity:Interaction.Behaviors>
+                        </Grid>
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="1">
+                            <Button Click="Reply_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
+                                <uwp:FontAwesome Icon="Reply" />
+                            </Button>
+                            <Button Click="ReShare_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="ReShare"/>
+                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding ReblogCount}"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Click="Favorite_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <uwp:FontAwesome Icon="{Binding Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <SymbolIcon Symbol="More"/>
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
+                                        <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
+                                        <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
+                                        <MenuFlyoutItem Click="Report_OnClick" CommandParameter="{Binding}" Text="Report"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Rectangle Grid.Row="1"  Fill="Gray"/>
+            </Grid>
+        </DataTemplate>
+        <templateSelector:StatusTemplateSelector x:Name="StatusTemplateSelector" RegularStatusDataTemplate="{StaticResource RegularStatusDataTemplate}"/>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -44,116 +155,7 @@
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
-            <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid MaxWidth="700" Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="1"/>
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image VerticalAlignment="Top" Height="50" Source="{Binding Account.AvatarUrl}"/>
-                                <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#96000000" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>
-                                        <Button CommandParameter="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Click="ShowNSFWPost_OnClick" Content="Show"/>
-                                    </StackPanel>
-                                </Grid>
-                                    <Grid x:Name="StatusGrid" Margin="5" Grid.Column="1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Account.UserName}" FontWeight="Bold" />
-                                                <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
-                                                <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
-                                            </Grid>
-                                            <Grid Margin="5" Grid.Row="1">
-                                                <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
-                                            </Grid>
-                                            <Grid Visibility="{Binding MediaAttachments, Converter={StaticResource ImageGalleryVisibilityConverter}}" Margin="5" Grid.Row="2">
-                                                <communitycontrols:AdaptiveGridView 
-                                                    OneRowModeEnabled="False"
-                                                    ItemHeight="100"
-                                                    DesiredWidth="100"
-                                                    IsItemClickEnabled="True"
-                                                    ItemClick="ImageItem_OnClick"
-                                                    ItemsSource="{Binding MediaAttachments}">
-                                                    <communitycontrols:AdaptiveGridView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Grid
-                                                                Background="White"
-                                                                BorderBrush="Black"
-                                                                BorderThickness="1">
-                                                                <Image
-                                                                    Source="{Binding PreviewUrl}"
-                                                                    Stretch="UniformToFill"
-                                                                    HorizontalAlignment="Center"
-                                                                    VerticalAlignment="Center"/>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </communitycontrols:AdaptiveGridView.ItemTemplate>
-                                                </communitycontrols:AdaptiveGridView>
-                                            </Grid>
-                                            <interactivity:Interaction.Behaviors>
-                                                <behaviors:Blur x:Name="SpoilerBlur"
-                                                                Value="{Binding Converter={StaticResource SpoilerOrNSFWConverter}}"
-                                                                Duration="500"
-                                                                Delay="0"
-                                                                AutomaticallyStart="True"/>
-                                            </interactivity:Interaction.Behaviors>
-                                        </Grid>
-                                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="1">
-                                            <Button Click="Reply_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
-                                                <uwp:FontAwesome Icon="Reply" />
-                                            </Button>
-                                            <Button Click="ReShare_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <SymbolIcon Symbol="ReShare"/>
-                                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding ReblogCount}"></TextBlock>
-                                                </StackPanel>
-                                            </Button>
-                                            <Button Click="Favorite_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <uwp:FontAwesome Icon="{Binding Favourited, Converter={StaticResource FavoriteIconConverter}}" />
-                                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
-                                                </StackPanel>
-                                            </Button>
-                                            <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                                                <SymbolIcon Symbol="More"/>
-                                                <Button.Flyout>
-                                                    <MenuFlyout>
-                                                        <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
-                                                        <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
-                                                        <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
-                                                        <MenuFlyoutItem Click="Report_OnClick" CommandParameter="{Binding}" Text="Report"/>
-                                                    </MenuFlyout>
-                                                </Button.Flyout>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                            </Grid>
-                            <Rectangle Grid.Row="1"  Fill="Gray"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">

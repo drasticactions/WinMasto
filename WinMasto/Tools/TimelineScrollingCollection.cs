@@ -35,7 +35,7 @@ namespace WinMasto.Tools
             ArrayOptions options = new ArrayOptions();
             if (_maxId > 0)
             {
-                options.MaxId = _maxId.ToString();
+                options.MaxId = _maxId;
             }
             switch (_path)
             {

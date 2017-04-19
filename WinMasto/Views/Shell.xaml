@@ -16,8 +16,8 @@
     <controls:HamburgerMenu x:Name="MyHamburgerMenu" 
                             SecondaryButtonOrientation="Vertical"
                             AccentColor="{ThemeResource SystemAccentColor}"
-                            VisualStateNarrowMinWidth="320"
-                            VisualStateNormalMinWidth="720">
+                            VisualStateNormalMinWidth="720"
+                            VisualStateWideMinWidth="1020">
         <controls:HamburgerMenu.PrimaryButtons>
             <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageParameter="home" PageType="local:MainPage">
                 <StackPanel Orientation="Horizontal">

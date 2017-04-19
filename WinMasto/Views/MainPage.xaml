@@ -47,7 +47,7 @@
             <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5">
+                        <Grid MaxWidth="700" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="1"/>

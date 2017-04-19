@@ -42,6 +42,15 @@ namespace WinMasto.ViewModels
 
         }
 
+        public async Task ShowNSFWPost(Status status)
+        {
+            Status newStatus = status;
+            newStatus.Sensitive = false;
+            newStatus.SpoilerText = string.Empty;
+            var index = Statuses.IndexOf(status);
+            Statuses[index] = newStatus;
+        }
+
         public async Task ReShareOption(Status status)
         {
             // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.

@@ -17,6 +17,11 @@
             <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter" />
             <converters:FavoriteIconConverter x:Key="FavoriteIconConverter" />
+            <converters:SpoilerConverter x:Key="SpoilerConverter" />
+            <converters:NSFWConverter x:Key="NSFWConverter" />
+            <converters:SpoilerOrNSFWConverter x:Key="SpoilerOrNSFWConverter" />
+            <converters:SpoilerOrNSFWTextConverter x:Key="SpoilerOrNSFWTextConverter" />
+            <converters:SpoilerOrNSFWVisibilityConverter x:Key="SpoilerOrNSFWVisibilityConverter" />
             <converters:ImageGalleryVisibilityConverter x:Key="ImageGalleryVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>

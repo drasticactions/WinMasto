@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
+using Microsoft.Toolkit.Uwp.UI.Animations;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using WinMasto.ViewModels;
 
@@ -97,6 +98,14 @@ namespace WinMasto.Views
             ImageGalleryView.ViewModel.SetStatus(status, attachment);
             FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
             flyoutBase.ShowAt(StatusGrid);
+        }
+
+        private async void ShowNSFWPost_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.ShowNSFWPost(status);
         }
     }
 }

@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using AmazingPullToRefresh.Controls;
 using Mastonet.Entities;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using WinMasto.ViewModels;
@@ -118,7 +117,7 @@ namespace WinMasto.Views
             await ViewModel.NavigateToAccountPage(status.Account);
         }
 
-        private async void PullToRefreshExtender_RefreshRequested(object sender, RefreshRequestedEventArgs e)
+        private async void ListView_RefreshCommand(object sender, EventArgs e)
         {
             await ViewModel.PullToRefresh();
         }

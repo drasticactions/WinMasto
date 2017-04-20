@@ -15,7 +15,6 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
-    xmlns:ptr="using:AmazingPullToRefresh.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -102,7 +101,7 @@
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1">
-                                                <Image
+                                                <communitycontrols:ImageEx
                                                     Source="{Binding PreviewUrl}"
                                                     Stretch="UniformToFill"
                                                     HorizontalAlignment="Center"
@@ -211,7 +210,7 @@
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1">
-                                                <Image
+                                                <communitycontrols:ImageEx
                                                     Source="{Binding PreviewUrl}"
                                                     Stretch="UniformToFill"
                                                     HorizontalAlignment="Center"
@@ -283,11 +282,11 @@
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
-            <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
-                <ptr:PullToRefreshAdorner.Extender>
-                    <ptr:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
-                </ptr:PullToRefreshAdorner.Extender>
-            </ListView>
+            <communitycontrols:PullToRefreshListView OverscrollLimit="0.27" PullThreshold="79"
+                                                     RefreshRequested="ListView_RefreshCommand"
+                                                     IsPullToRefreshWithMouseEnabled="True"
+                                                     x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
+            </communitycontrols:PullToRefreshListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
                     <localcontrols:ImageGalleryView x:Name="ImageGalleryView"></localcontrols:ImageGalleryView>

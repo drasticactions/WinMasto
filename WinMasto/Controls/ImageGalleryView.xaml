@@ -21,8 +21,8 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <DataTemplate x:Name="ImageDataTemplate">
-            <Image Stretch="UniformToFill" Source="{Binding Url}">
-            </Image>
+            <controls:ImageEx Stretch="UniformToFill" Source="{Binding Url}">
+            </controls:ImageEx>
         </DataTemplate>
         <DataTemplate x:Name="MediaDataTemplate">
             <MediaElement Source="{Binding Url}"></MediaElement>

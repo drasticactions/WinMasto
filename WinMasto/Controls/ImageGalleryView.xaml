@@ -12,6 +12,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:WinMasto.Tools.Converters"
+    xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -19,7 +20,14 @@
         <viewModels:ImageGalleryViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
-        <CollectionViewSource x:Name="PictureViewSource" Source="{Binding Status.MediaAttachments}"/>
+        <DataTemplate x:Name="ImageDataTemplate">
+            <Image Stretch="UniformToFill" Source="{Binding Url}">
+            </Image>
+        </DataTemplate>
+        <DataTemplate x:Name="MediaDataTemplate">
+            <MediaElement Source="{Binding Url}"></MediaElement>
+        </DataTemplate>
+        <templateSelector:MediaAttachmentTemplateSelector x:Name="MediaAttachmentTemplateSelector" ImageStatusDataTemplate="{StaticResource ImageDataTemplate}" VideoStatusDataTemplate="{StaticResource MediaDataTemplate}"></templateSelector:MediaAttachmentTemplateSelector>
     </UserControl.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="600" MaxWidth="500">
         <Grid.RowDefinitions>
@@ -27,26 +35,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <FlipView ItemsSource="{Binding Status.MediaAttachments}">
-                <FlipView.ItemTemplate>
-                    <DataTemplate>
-                        <Image Stretch="UniformToFill" Source="{Binding Url}">
-                            <FlyoutBase.AttachedFlyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Text="Save" Click="Save_OnClick" CommandParameter="{Binding}"/>
-                                </MenuFlyout>
-                            </FlyoutBase.AttachedFlyout>
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Holding">
-                                    <converters:OpenMenuFlyoutAction />
-                                </core:EventTriggerBehavior>
-                                <core:EventTriggerBehavior EventName="RightTapped">
-                                    <converters:OpenMenuFlyoutAction />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-                        </Image>
-                    </DataTemplate>
-                </FlipView.ItemTemplate>
+            <FlipView ItemTemplateSelector="{StaticResource MediaAttachmentTemplateSelector}" ItemsSource="{Binding Status.MediaAttachments}">
             </FlipView>
         </Grid>
         <Grid Grid.Row="1">

@@ -113,6 +113,7 @@
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
     <Compile Include="Tools\Files\FileAccessCommands.cs" />
+    <Compile Include="Tools\TemplateSelector\MediaAttachmentTemplateSelector.cs" />
     <Compile Include="Tools\TemplateSelector\StatusTemplateSelector.cs" />
     <Compile Include="Tools\TimelineScrollingCollection.cs" />
     <Compile Include="ViewModels\AccountPageViewModel.cs" />

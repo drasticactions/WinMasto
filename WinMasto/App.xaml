@@ -25,6 +25,7 @@
             <converters:SpoilerOrNSFWVisibilityConverter x:Key="SpoilerOrNSFWVisibilityConverter" />
             <converters:ImageGalleryVisibilityConverter x:Key="ImageGalleryVisibilityConverter" />
             <templateSelector:StatusTemplateSelector x:Key="StatusTemplateSelector"/>
+            <templateSelector:MediaAttachmentTemplateSelector x:Key="MediaAttachmentTemplateSelector"/>
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

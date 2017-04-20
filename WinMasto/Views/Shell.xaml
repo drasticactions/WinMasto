@@ -54,10 +54,10 @@
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48"
                                 Height="48"
-                                Symbol="OtherUser" />
+                                Symbol="Account" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="Me" />
+                               Text="Account" />
                 </StackPanel>
             </controls:HamburgerButtonInfo>
         </controls:HamburgerMenu.PrimaryButtons>
@@ -72,7 +72,7 @@
             <controls:HamburgerButtonInfo x:Name="LoginButton" PageType="local:LoginPage">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48" Symbol="Contact" />
-                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Account" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Login" />
                 </StackPanel>
             </controls:HamburgerButtonInfo>
             <!-- settings button -->

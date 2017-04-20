@@ -138,6 +138,8 @@
                                 <SymbolIcon Symbol="More"/>
                                 <Button.Flyout>
                                     <MenuFlyout>
+                                        <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
+                                        <MenuFlyoutSeparator/>
                                         <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
                                         <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
                                         <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
@@ -245,6 +247,8 @@
                                 <SymbolIcon Symbol="More"/>
                                 <Button.Flyout>
                                     <MenuFlyout>
+                                        <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding}" Text="Show Account"/>
+                                        <MenuFlyoutSeparator/>
                                         <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
                                         <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
                                         <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
@@ -278,6 +282,54 @@
         </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
             <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:FadeHeaderBehavior />
+                </interactivity:Interaction.Behaviors>
+                <ListView.Header>
+                    <Grid Padding="0,0,0,20" MaxWidth="700">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="275"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Image Stretch="UniformToFill"  Canvas.ZIndex="0" Source="{Binding Account.HeaderUrl}"></Image>
+                        </Grid>
+                        <Grid Margin="0,15,0,0" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100">
+                                    <Ellipse.Fill>
+                                        <ImageBrush>
+                                            <ImageBrush.ImageSource>
+                                                <BitmapImage DecodePixelHeight="100" DecodePixelWidth="100" UriSource="{Binding Account.AvatarUrl}" />
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                            <Grid Padding="10,0,0,0" HorizontalAlignment="Left" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}"  FontWeight="Bold" Text="{Binding Account.UserName}"/>
+                                <TextBlock Grid.Row="1" Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Padding="0,10,0,0" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Account.Note, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
+                        </Grid>
+                    </Grid>
+                </ListView.Header>
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
@@ -287,6 +339,11 @@
         </Grid>
     </Grid>
 </Page>
+
+
+
+
+
 
 
 

@@ -28,6 +28,7 @@ namespace WinMasto.Views
         public AccountPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         public AccountPageViewModel ViewModel => this.DataContext as AccountPageViewModel;
@@ -105,6 +106,15 @@ namespace WinMasto.Views
             if (button == null) return;
             var status = button?.CommandParameter as Status;
             await ViewModel.ShowNSFWPost(status);
+        }
+
+        private async void ShowAccount_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as MenuFlyoutItem;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            if (status == null) return;
+            await ViewModel.NavigateToAccountPage(status.Account);
         }
     }
 }

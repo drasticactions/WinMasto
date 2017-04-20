@@ -137,5 +137,9 @@ namespace WinMasto.ViewModels
                 Set(ref _title, value);
             }
         }
+
+        internal string _path;
+
+        internal string _accountname;
     }
 }

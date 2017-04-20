@@ -29,6 +29,7 @@ namespace WinMasto.Views
         public MainPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         public MainPageViewModel ViewModel => this.DataContext as MainPageViewModel;

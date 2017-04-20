@@ -16,8 +16,10 @@ namespace WinMasto.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             IsLoading = true;
-            Title = "Account";
             await LoginUser();
+            var getNewStatus = false;
+            // TODO: The navigation cache will make it so that it will always get a new page.
+            // I need to figure out a better way to handle this. This is a mess.
             if (IsLoggedIn)
             {
                 try
@@ -25,11 +27,21 @@ namespace WinMasto.ViewModels
                     if (parameter != null)
                     {
                         var testAccount = JsonConvert.DeserializeObject<Account>((string) parameter);
-                        Account = await Client.GetAccount(testAccount.Id);
+                        if (Account == null || testAccount.Id != Account.Id)
+                        {
+                            Account = await Client.GetAccount(testAccount.Id);
+                            getNewStatus = true;
+                        }
                     }
                     else
                     {
-                        Account = SettingsService.Instance.UserAccount;
+                        var serviceAccountTest = SettingsService.Instance.UserAccount;
+                        if (Account == null || serviceAccountTest.Id != Account.Id)
+                        {
+                            Account = await Client.GetAccount(serviceAccountTest.Id);
+                            SettingsService.Instance.UserAccount = Account;
+                            getNewStatus = true;
+                        }
                     }
                 }
                 catch (Exception e)
@@ -38,7 +50,10 @@ namespace WinMasto.ViewModels
                     Account = SettingsService.Instance.UserAccount;
                 }
                 Title = Account.UserName;
-                Statuses = new TimelineScrollingCollection(Client, "account", Account.Id);
+                if (getNewStatus)
+                {
+                    Statuses = new TimelineScrollingCollection(Client, "account", Account.Id);
+                }
                 RaisePropertyChanged("Statuses");
             }
             IsLoading = false;

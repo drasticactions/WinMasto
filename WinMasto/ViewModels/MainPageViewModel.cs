@@ -22,12 +22,17 @@ namespace WinMasto.ViewModels
         {
             IsLoading = true;
             var path = (string)parameter;
+            if (path == null) path = "home";
             SetTitle(path);
             await LoginUser();
             if (IsLoggedIn)
             {
-               
-                Statuses = new TimelineScrollingCollection(Client, path);
+
+                if (mode == NavigationMode.New || (mode == NavigationMode.Back && path != _path))
+                {
+                    _path = path;
+                    Statuses = new TimelineScrollingCollection(Client, path);
+                }
                 RaisePropertyChanged("Statuses");
             }
             IsLoading = false;

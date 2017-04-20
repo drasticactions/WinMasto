@@ -98,7 +98,7 @@ namespace WinMasto
             }
             else
             {
-                await NavigationService.NavigateAsync(typeof(Views.MainPage));
+                await NavigationService.NavigateAsync(typeof(Views.MainPage), "home");
             }
         }
 

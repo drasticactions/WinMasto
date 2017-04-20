@@ -294,24 +294,22 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Image Stretch="UniformToFill"  Canvas.ZIndex="0" Source="{Binding Account.HeaderUrl}"></Image>
+                            <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100">
+                                <Ellipse.Fill>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage DecodePixelHeight="100" DecodePixelWidth="100" UriSource="{Binding Account.AvatarUrl}" />
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
                         </Grid>
                         <Grid Margin="0,15,0,0" Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100">
-                                    <Ellipse.Fill>
-                                        <ImageBrush>
-                                            <ImageBrush.ImageSource>
-                                                <BitmapImage DecodePixelHeight="100" DecodePixelWidth="100" UriSource="{Binding Account.AvatarUrl}" />
-                                            </ImageBrush.ImageSource>
-                                        </ImageBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </Grid>
-                            <Grid Padding="10,0,0,0" HorizontalAlignment="Left" Grid.Column="1">
+                            <Grid Padding="10,0,0,0" HorizontalAlignment="Left" Grid.Column="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -326,7 +324,9 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Account.Note, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
+                            <Grid>
+                                <TextBlock TextAlignment="Center" TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Account.Note, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </ListView.Header>

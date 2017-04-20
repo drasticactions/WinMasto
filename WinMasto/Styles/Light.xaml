@@ -4,4 +4,5 @@
     xmlns:local="using:WinMasto.Styles">
     <SolidColorBrush x:Key="MainPageBackground" Color="#E5E5E5"/>
     <Color x:Key="LoadingBackground">#FFFFFF</Color>
+    <Color x:Key="StatusTextColor">#000000</Color>
 </ResourceDictionary>

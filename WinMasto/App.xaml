@@ -24,6 +24,7 @@
             <converters:SpoilerOrNSFWTextConverter x:Key="SpoilerOrNSFWTextConverter" />
             <converters:SpoilerOrNSFWVisibilityConverter x:Key="SpoilerOrNSFWVisibilityConverter" />
             <converters:ImageGalleryVisibilityConverter x:Key="ImageGalleryVisibilityConverter" />
+            <converters:ThumbnailToImageConverter x:Key="ThumbnailToImageConverter" />
             <templateSelector:StatusTemplateSelector x:Key="StatusTemplateSelector"/>
             <templateSelector:MediaAttachmentTemplateSelector x:Key="MediaAttachmentTemplateSelector"/>
         </ResourceDictionary>

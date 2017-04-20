@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:viewModels="using:WinMasto.ViewModels"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
     <Page.DataContext>
         <viewModels:NewStatusPageViewModel />
@@ -15,10 +16,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="New Status" Frame="{x:Bind Frame}">
+        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" Content="New Status" Frame="{x:Bind Frame}">
         </controls:PageHeader>
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>
@@ -27,14 +29,45 @@
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
         <TextBox Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
-        <Rectangle Grid.Row="2"  Fill="Gray"/>
-        <Grid Margin="5" Grid.Row="3">
+        <controls1:AdaptiveGridView 
+            OneRowModeEnabled="False"
+            ItemHeight="100"
+            DesiredWidth="100"
+            IsItemClickEnabled="True"
+            Grid.Row="2"
+            ItemsSource="{Binding PhotoList}">
+            <controls1:AdaptiveGridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                        <Button 
+                            Click="RemovePhoto_OnClick"
+                            CommandParameter="{Binding}"
+                            Background="#5D808080"  
+                            Style="{ThemeResource RemoveImageButtonStyle}"
+                            Canvas.ZIndex="2" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Right" 
+                            Content="X"/>
+                        <controls1:ImageEx
+                            Source="{Binding Thumbnail, Converter={StaticResource ThumbnailToImageConverter}}"
+                            Stretch="UniformToFill"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </controls1:AdaptiveGridView.ItemTemplate>
+        </controls1:AdaptiveGridView>
+        <Rectangle Grid.Row="3"  Fill="Gray"/>
+        <Grid Margin="5" Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <Button Style="{StaticResource StatusButtonStyle}">
+                <Button Click="SelectPhotos_OnClick" Style="{StaticResource StatusButtonStyle}">
                     <SymbolIcon Symbol="Camera"/>
                 </Button>
             </StackPanel>
@@ -45,3 +78,6 @@
         </Grid>
     </Grid>
 </Page>
+
+
+

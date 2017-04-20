@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Mastonet;
 using Mastonet.Entities;
+using WinMasto.Models;
 using WinMasto.Views;
 
 namespace WinMasto.ViewModels
@@ -18,7 +19,19 @@ namespace WinMasto.ViewModels
         {
             IsLoading = true;
             await LoginUser();
+            PhotoList = new ObservableCollection<PhotoFileInfo>();
             IsLoading = false;
+        }
+
+        private ObservableCollection<PhotoFileInfo> _photoList;
+
+        public ObservableCollection<PhotoFileInfo> PhotoList
+        {
+            get { return _photoList; }
+            set
+            {
+                Set(ref _photoList, value);
+            }
         }
 
         private string _status = "";

@@ -1,20 +1,19 @@
 ﻿<Page
-    x:Class="WinMasto.Views.MainPage"
+    x:Class="WinMasto.Views.AccountPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinMasto.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:WinMasto.ViewModels"
-    xmlns:entities="using:Mastonet.Entities"
     xmlns:extensions="using:WinMasto.Tools.Extensions"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:communitycontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:uwp="using:FontAwesome.UWP"
-    xmlns:localcontrols="using:WinMasto.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:uwp="using:FontAwesome.UWP"
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
+    xmlns:controls1="using:Template10.Controls"
+    xmlns:controls2="using:WinMasto.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -26,7 +25,7 @@
         </TransitionCollection>
     </Page.Transitions>
     <Page.DataContext>
-        <viewModels:MainPageViewModel />
+        <viewModels:AccountPageViewModel />
     </Page.DataContext>
     <Page.Resources>
         <DataTemplate x:Name="ReblogRegularStatusDataTemplate">
@@ -88,14 +87,14 @@
                                 <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
                             </Grid>
                             <Grid Visibility="{Binding MediaAttachments, Converter={StaticResource ImageGalleryVisibilityConverter}}" Margin="5" Grid.Row="2">
-                                <communitycontrols:AdaptiveGridView 
+                                <controls:AdaptiveGridView 
                                     OneRowModeEnabled="False"
                                     ItemHeight="100"
                                     DesiredWidth="100"
                                     IsItemClickEnabled="True"
                                     ItemClick="ImageItem_OnClick"
                                     ItemsSource="{Binding MediaAttachments}">
-                                    <communitycontrols:AdaptiveGridView.ItemTemplate>
+                                    <controls:AdaptiveGridView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid
                                                 Background="White"
@@ -108,8 +107,8 @@
                                                     VerticalAlignment="Center"/>
                                             </Grid>
                                         </DataTemplate>
-                                    </communitycontrols:AdaptiveGridView.ItemTemplate>
-                                </communitycontrols:AdaptiveGridView>
+                                    </controls:AdaptiveGridView.ItemTemplate>
+                                </controls:AdaptiveGridView>
                             </Grid>
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:Blur x:Name="SpoilerBlur"
@@ -139,8 +138,6 @@
                                 <SymbolIcon Symbol="More"/>
                                 <Button.Flyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
-                                        <MenuFlyoutSeparator/>
                                         <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
                                         <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
                                         <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
@@ -197,14 +194,14 @@
                                 <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Content, Converter={StaticResource StripHtmlConverter}}"/>
                             </Grid>
                             <Grid Visibility="{Binding MediaAttachments, Converter={StaticResource ImageGalleryVisibilityConverter}}" Margin="5" Grid.Row="2">
-                                <communitycontrols:AdaptiveGridView 
+                                <controls:AdaptiveGridView 
                                     OneRowModeEnabled="False"
                                     ItemHeight="100"
                                     DesiredWidth="100"
                                     IsItemClickEnabled="True"
                                     ItemClick="ImageItem_OnClick"
                                     ItemsSource="{Binding MediaAttachments}">
-                                    <communitycontrols:AdaptiveGridView.ItemTemplate>
+                                    <controls:AdaptiveGridView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid
                                                 Background="White"
@@ -217,8 +214,8 @@
                                                     VerticalAlignment="Center"/>
                                             </Grid>
                                         </DataTemplate>
-                                    </communitycontrols:AdaptiveGridView.ItemTemplate>
-                                </communitycontrols:AdaptiveGridView>
+                                    </controls:AdaptiveGridView.ItemTemplate>
+                                </controls:AdaptiveGridView>
                             </Grid>
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:Blur x:Name="SpoilerBlur"
@@ -248,8 +245,6 @@
                                 <SymbolIcon Symbol="More"/>
                                 <Button.Flyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding}" Text="Show Account"/>
-                                        <MenuFlyoutSeparator/>
                                         <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
                                         <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
                                         <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
@@ -272,8 +267,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
-        </controls:PageHeader>
+        <controls1:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
+        </controls1:PageHeader>
         <ProgressBar IsIndeterminate="True" Visibility="{x:Bind ViewModel.Statuses.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
         <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>
@@ -286,10 +281,16 @@
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
-                    <localcontrols:ImageGalleryView x:Name="ImageGalleryView"></localcontrols:ImageGalleryView>
+                    <controls2:ImageGalleryView x:Name="ImageGalleryView"></controls2:ImageGalleryView>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>
         </Grid>
     </Grid>
 </Page>
+
+
+
+
+
+
 

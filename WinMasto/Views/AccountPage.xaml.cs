@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
-using Microsoft.Toolkit.Uwp.UI.Animations;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using WinMasto.ViewModels;
 
@@ -24,14 +23,14 @@ namespace WinMasto.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class AccountPage : Page
     {
-        public MainPage()
+        public AccountPage()
         {
             this.InitializeComponent();
         }
 
-        public MainPageViewModel ViewModel => this.DataContext as MainPageViewModel;
+        public AccountPageViewModel ViewModel => this.DataContext as AccountPageViewModel;
 
         private async void Mention_OnClick(object sender, RoutedEventArgs e)
         {
@@ -106,15 +105,6 @@ namespace WinMasto.Views
             if (button == null) return;
             var status = button?.CommandParameter as Status;
             await ViewModel.ShowNSFWPost(status);
-        }
-
-        private async void ShowAccount_OnClick(object sender, RoutedEventArgs e)
-        {
-            var button = sender as MenuFlyoutItem;
-            if (button == null) return;
-            var status = button?.CommandParameter as Status;
-            if (status == null) return;
-            await ViewModel.NavigateToAccountPage(status.Account);
         }
     }
 }

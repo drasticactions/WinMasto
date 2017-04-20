@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mastonet;
 using Mastonet.Entities;
+using Newtonsoft.Json;
 using WinMasto.Tools;
 using WinMasto.Views;
 
@@ -40,6 +41,11 @@ namespace WinMasto.ViewModels
         public async Task ReportOption(Status status)
         {
 
+        }
+
+        public async Task NavigateToAccountPage(Account account)
+        {
+            await NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(account));
         }
 
         public async Task ShowNSFWPost(Status status)

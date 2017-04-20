@@ -15,12 +15,13 @@ namespace WinMasto.Tools
 {
     public class TimelineScrollingCollection : ObservableCollection<Status>, ISupportIncrementalLoading
     {
-        public TimelineScrollingCollection(MastodonClient client, string path)
+        public TimelineScrollingCollection(MastodonClient client, string path, int accountId = 0)
         {
             HasMoreItems = true;
             IsLoading = false;
             _client = client;
             _path = path;
+            _accountId = accountId;
         }
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
@@ -37,6 +38,7 @@ namespace WinMasto.Tools
             {
                 options.MaxId = _maxId;
             }
+            
             switch (_path)
             {
                 case "home":
@@ -47,6 +49,9 @@ namespace WinMasto.Tools
                     break;
                 case "local":
                     statuses = await _client.GetPublicTimeline(options, true);
+                    break;
+                case "account":
+                    statuses = await _client.GetAccountStatuses(_accountId, options);
                     break;
                 default:
                     statuses = await _client.GetHomeTimeline(options);
@@ -80,6 +85,8 @@ namespace WinMasto.Tools
         private int _sinceId;
 
         private int _maxId;
+
+        private int _accountId;
 
         private MastodonClient _client;
 

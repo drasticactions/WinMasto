@@ -15,6 +15,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
+    xmlns:ptr="using:AmazingPullToRefresh.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -283,6 +284,9 @@
         </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
             <ListView x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
+                <ptr:PullToRefreshAdorner.Extender>
+                    <ptr:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+                </ptr:PullToRefreshAdorner.Extender>
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">

@@ -14,6 +14,7 @@
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
     xmlns:controls1="using:Template10.Controls"
     xmlns:controls2="using:WinMasto.Controls"
+    xmlns:controls3="using:AmazingPullToRefresh.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -330,6 +331,9 @@
                         </Grid>
                     </Grid>
                 </ListView.Header>
+                <controls3:PullToRefreshAdorner.Extender>
+                    <controls3:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+                </controls3:PullToRefreshAdorner.Extender>
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
@@ -339,6 +343,19 @@
         </Grid>
     </Grid>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

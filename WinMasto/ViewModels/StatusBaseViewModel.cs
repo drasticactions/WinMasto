@@ -43,6 +43,11 @@ namespace WinMasto.ViewModels
 
         }
 
+        public async Task PullToRefresh()
+        {
+            await Statuses.PullToRefresh();
+        }
+
         public async Task NavigateToAccountPage(Account account)
         {
             await NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(account));

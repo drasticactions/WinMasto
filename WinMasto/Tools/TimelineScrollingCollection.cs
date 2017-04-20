@@ -29,16 +29,39 @@ namespace WinMasto.Tools
             return LoadDataAsync(count).AsAsyncOperation();
         }
 
-        public async Task<LoadMoreItemsResult> LoadDataAsync(uint count)
+        public async Task PullToRefresh()
+        {
+            var statuses = await RefreshTimeline(true);
+            if (statuses.Any())
+            {
+                var reverseStatus = statuses.Reverse();
+                foreach (var status in reverseStatus)
+                {
+                    this.Insert(0, status);
+                }
+            }
+        }
+
+        public async Task<IEnumerable<Status>> RefreshTimeline(bool pullToRefresh)
         {
             IsLoading = true;
             IEnumerable<Status> statuses;
             ArrayOptions options = new ArrayOptions();
-            if (_maxId > 0)
+            if (pullToRefresh)
             {
-                options.MaxId = _maxId;
+                if (this.Any())
+                {
+                    options.SinceId = this.First().Id;
+                }
             }
-            
+            else
+            {
+                if (_maxId > 0)
+                {
+                    options.MaxId = _maxId;
+                }
+            }
+
             switch (_path)
             {
                 case "home":
@@ -57,6 +80,13 @@ namespace WinMasto.Tools
                     statuses = await _client.GetHomeTimeline(options);
                     break;
             }
+            IsLoading = false;
+            return statuses;
+        }
+
+        public async Task<LoadMoreItemsResult> LoadDataAsync(uint count)
+        {
+            var statuses = await RefreshTimeline(false);
             if (statuses.Any())
             {
                 this.AddRange(statuses);
@@ -66,7 +96,6 @@ namespace WinMasto.Tools
             {
                 HasMoreItems = false;
             }
-            IsLoading = false;
             return new LoadMoreItemsResult { Count = count };
         }
 

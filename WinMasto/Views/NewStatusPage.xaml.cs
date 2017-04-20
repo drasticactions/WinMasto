@@ -37,6 +37,7 @@ namespace WinMasto.Views
 
         private async void SelectPhotos_OnClick(object sender, RoutedEventArgs e)
         {
+            ViewModel.IsLoading = true;
             var openPicker = new FileOpenPicker
             {
 
@@ -54,7 +55,14 @@ namespace WinMasto.Views
                 File = file,
                 Thumbnail = await file.GetThumbnailAsync(ThumbnailMode.SingleItem)
             };
-            ViewModel.PhotoList.Add(photoFileInfo);
+            using (var randomStream = await file.OpenAsync(FileAccessMode.Read))
+            {
+                //var attachment = await ViewModel.Client.UploadMedia(randomStream.AsStream());
+                //StatusTextBox.Text += $" {attachment.Url}";
+                //photoFileInfo.Attachment = attachment;
+                ViewModel.PhotoList.Add(photoFileInfo);
+                ViewModel.IsLoading = false;
+            }
         }
 
         private void RemovePhoto_OnClick(object sender, RoutedEventArgs e)
@@ -62,6 +70,8 @@ namespace WinMasto.Views
             var menuFlyoutItem = sender as Button;
             var status = menuFlyoutItem?.CommandParameter as PhotoFileInfo;
             if (status == null) return;
+            var newText = StatusTextBox.Text.Remove(StatusTextBox.Text.IndexOf(status.Attachment.Url, StringComparison.Ordinal), status.Attachment.Url.Length);
+            StatusTextBox.Text = newText;
             ViewModel.PhotoList.Remove(status);
         }
     }

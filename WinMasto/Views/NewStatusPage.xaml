@@ -28,7 +28,7 @@
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <TextBox Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
+        <TextBox x:Name="StatusTextBox"  Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
         <controls1:AdaptiveGridView 
             OneRowModeEnabled="False"
             ItemHeight="100"

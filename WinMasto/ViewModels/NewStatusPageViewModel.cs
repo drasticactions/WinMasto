@@ -23,6 +23,8 @@ namespace WinMasto.ViewModels
             IsLoading = false;
         }
 
+        public int? InReplyToStatusId { get; set; }
+
         private ObservableCollection<PhotoFileInfo> _photoList;
 
         public ObservableCollection<PhotoFileInfo> PhotoList
@@ -34,6 +36,17 @@ namespace WinMasto.ViewModels
             }
         }
 
+        private bool _sensitive = default(bool);
+
+        public bool Sensitive
+        {
+            get { return _sensitive; }
+            set
+            {
+                Set(ref _sensitive, value);
+            }
+        }
+
         private string _status = "";
 
         public string Status
@@ -42,6 +55,17 @@ namespace WinMasto.ViewModels
             set
             {
                 Set(ref _status, value);
+            }
+        }
+
+        private string _spoilerText = "";
+
+        public string SpoilerText
+        {
+            get { return _spoilerText; }
+            set
+            {
+                Set(ref _spoilerText, value);
             }
         }
 
@@ -65,7 +89,12 @@ namespace WinMasto.ViewModels
         {
             // TODO: This is for testing the postStatus function. Make this more generic.
             if (string.IsNullOrEmpty(Status) || Status.Length > 500) return;
-            var result = await Client.PostStatus(Status, Visibility.Public);
+            IEnumerable<int> mediaIds = null;
+            if (PhotoList.Any())
+            {
+                mediaIds = PhotoList.Select(node => node.Attachment.Id);
+            }
+            var result = await Client.PostStatus(Status, Visibility.Public, InReplyToStatusId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
             await NavigationService.NavigateAsync(typeof(MainPage));
         }
     }

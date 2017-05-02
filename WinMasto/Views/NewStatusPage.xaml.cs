@@ -49,7 +49,11 @@ namespace WinMasto.Views
             openPicker.FileTypeFilter.Add(".png");
             openPicker.FileTypeFilter.Add(".gif");
             StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null) return;
+            if (file == null)
+            {
+                ViewModel.IsLoading = false;
+                return;
+            }
             var photoFileInfo = new PhotoFileInfo()
             {
                 File = file,

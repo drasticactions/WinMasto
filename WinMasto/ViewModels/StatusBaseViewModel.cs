@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Mastonet;
 using Mastonet.Entities;
 using Newtonsoft.Json;
+using WinMasto.Models;
 using WinMasto.Tools;
 using WinMasto.Views;
 
@@ -20,12 +21,12 @@ namespace WinMasto.ViewModels
 
         public async Task ReplyOption(Status status)
         {
-
+            await NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsReply = true, Status = status});
         }
 
         public async Task MentionOption(Status status)
         {
-
+            await NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsMention = true, Status = status });
         }
 
         public async Task BlockOption(Status status)

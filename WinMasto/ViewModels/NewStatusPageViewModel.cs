@@ -18,6 +18,22 @@ namespace WinMasto.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             IsLoading = true;
+
+            var statusParameters = parameter as NewStatusParameter;
+            if (statusParameters != null)
+            {
+                if (statusParameters.IsMention)
+                {
+                    Status += $"@{statusParameters.Status.Account.AccountName}";
+                }
+
+                if (statusParameters.IsReply)
+                {
+                    ReplyStatus = statusParameters.Status;
+                    Status += $"@{statusParameters.Status.Account.AccountName}";
+                }
+            }
+
             await LoginUser();
             PhotoList = new ObservableCollection<PhotoFileInfo>();
             IsLoading = false;

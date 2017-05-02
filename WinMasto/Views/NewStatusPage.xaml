@@ -8,11 +8,24 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:viewModels="using:WinMasto.ViewModels"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:brushes="using:WinMasto.Brushes"
     mc:Ignorable="d">
     <Page.DataContext>
         <viewModels:NewStatusPageViewModel />
     </Page.DataContext>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    <Grid>
+        <Grid.Background>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource StatusBackground}" BlurAmount="20"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -20,7 +33,10 @@
             <RowDefinition Height="1"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" Content="New Status" Frame="{x:Bind Frame}">
+        <controls:PageHeader Foreground="White" BackButtonVisibility="Collapsed" Content="New Status" Frame="{x:Bind Frame}">
+            <controls:PageHeader.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+            </controls:PageHeader.Background>
         </controls:PageHeader>
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>

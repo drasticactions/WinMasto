@@ -9,6 +9,7 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:brushes="using:WinMasto.Brushes"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -22,14 +23,20 @@
     <Page.DataContext>
         <viewModels:SettingsPageViewModel />
     </Page.DataContext>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource StatusBackground}" BlurAmount="20"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <controls:PageHeader BackButtonVisibility="Collapsed" Background="{ThemeResource SystemAccentColor}" Foreground="White" Content="Settings" Frame="{x:Bind Frame}">
+        <controls:PageHeader BackButtonVisibility="Collapsed" Foreground="White" Content="Settings" Frame="{x:Bind Frame}">
+            <controls:PageHeader.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+            </controls:PageHeader.Background>
             <interactivity:Interaction.Behaviors>
                 <behaviors:EllipsisBehavior Visibility="Collapsed" />
             </interactivity:Interaction.Behaviors>

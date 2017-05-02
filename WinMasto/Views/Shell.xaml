@@ -99,21 +99,21 @@
                 </controls:HamburgerButtonInfo>
             </controls:HamburgerMenu.PrimaryButtons>
             <controls:HamburgerMenu.SecondaryButtons>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" x:Name="StatusButton" PageType="local:NewStatusPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" x:Name="StatusButton" PageType="local:NewStatusPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48" Height="48" Symbol="Edit" />
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="New Status" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
                 <!-- login button -->
-                <controls:HamburgerButtonInfo x:Name="LoginButton" PageType="local:LoginPage">
+                <controls:HamburgerButtonInfo x:Name="LoginButton" ClearHistory="True" PageType="local:LoginPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48" Height="48" Symbol="Contact" />
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Login" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
                 <!-- settings button -->
-                <controls:HamburgerButtonInfo PageType="local:SettingsPage">
+                <controls:HamburgerButtonInfo ClearHistory="True" PageType="local:SettingsPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48" Height="48" Symbol="Setting" />
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Settings" />

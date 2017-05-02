@@ -10,6 +10,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:controls="using:Template10.Controls"
+    xmlns:brushes="using:WinMasto.Brushes"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -23,13 +24,19 @@
     <Page.DataContext>
         <viewModels:LoginPageViewModel />
     </Page.DataContext>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource StatusBackground}" BlurAmount="20"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="Account" Frame="{x:Bind Frame}">
+        <controls:PageHeader Foreground="White" BackButtonVisibility="Collapsed"   Content="Account" Frame="{x:Bind Frame}">
+            <controls:PageHeader.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+            </controls:PageHeader.Background>
         </controls:PageHeader>
         <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.Background>

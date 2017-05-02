@@ -266,26 +266,23 @@
         </DataTemplate>
         <templateSelector:StatusTemplateSelector x:Name="StatusTemplateSelector" ReblogStatusDataTemplate="{StaticResource ReblogRegularStatusDataTemplate}" RegularStatusDataTemplate="{StaticResource RegularStatusDataTemplate}"/>
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource StatusBackground}" BlurAmount="20"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
+        <controls:PageHeader Foreground="White" BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
+            <controls:PageHeader.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+            </controls:PageHeader.Background>
         </controls:PageHeader>
-        <ProgressBar IsIndeterminate="True" Visibility="{x:Bind ViewModel.Statuses.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
-        <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.Background>
-                <SolidColorBrush Opacity=".9" Color="{ThemeResource LoadingBackground}"></SolidColorBrush>
-            </Grid.Background>
-            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
-        </Grid>
-        <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
-            <Grid.Background>
-                <brushes:HostBlurBrush BlurColor="Black" BlurAmount="20"/>
-            </Grid.Background>
+        <ProgressBar Grid.Row="1" IsIndeterminate="True" Visibility="{Binding Statuses.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" Height="10" Canvas.ZIndex="5" />
+        <Grid x:Name="StatusGrid" Grid.Row="1" VerticalAlignment="Stretch">
+            
             <communitycontrols:PullToRefreshListView OverscrollLimit="0.27" PullThreshold="79"
                                                      RefreshRequested="ListView_RefreshCommand"
                                                      IsPullToRefreshWithMouseEnabled="True"

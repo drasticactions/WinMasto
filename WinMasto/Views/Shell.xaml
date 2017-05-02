@@ -35,6 +35,7 @@
                                 NavButtonForeground="{ThemeResource NavButtonForegroundColor}"
                                 NavButtonCheckedForeground="{ThemeResource NavButtonCheckedForegroundColor}"
                                 NavButtonHoverForeground="{ThemeResource NavButtonHoverForegroundColor}"
+                                NavButtonPressedForeground="{ThemeResource NavButtonHoverForegroundColor}"
                                 HamburgerForeground="{ThemeResource HamburgerForegroundColor}"
                                 VisualStateNarrowMinWidth="320"
                                 VisualStateNormalMinWidth="720"
@@ -48,6 +49,9 @@
             <controls:HamburgerMenu.NavButtonCheckedBackground>
                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".50"></SolidColorBrush>
             </controls:HamburgerMenu.NavButtonCheckedBackground>
+            <controls:HamburgerMenu.NavButtonPressedBackground>
+                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".60"></SolidColorBrush>
+            </controls:HamburgerMenu.NavButtonPressedBackground>
             <controls:HamburgerMenu.NavButtonHoverBackground>
                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".20"></SolidColorBrush>
             </controls:HamburgerMenu.NavButtonHoverBackground>

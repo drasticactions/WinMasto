@@ -57,10 +57,17 @@ namespace WinMasto.Views
             };
             using (var randomStream = await file.OpenAsync(FileAccessMode.Read))
             {
-                //var attachment = await ViewModel.Client.UploadMedia(randomStream.AsStream());
-                //StatusTextBox.Text += $" {attachment.Url}";
-                //photoFileInfo.Attachment = attachment;
-                ViewModel.PhotoList.Add(photoFileInfo);
+                var attachment = await ViewModel.Client.UploadMedia(randomStream.AsStream(), Path.GetFileName(file.Path));
+                try
+                {
+                    StatusTextBox.Text += $" {attachment.Url}";
+                    photoFileInfo.Attachment = attachment;
+                    ViewModel.PhotoList.Add(photoFileInfo);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
                 ViewModel.IsLoading = false;
             }
         }

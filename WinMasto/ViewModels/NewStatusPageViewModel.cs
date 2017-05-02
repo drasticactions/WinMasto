@@ -23,8 +23,6 @@ namespace WinMasto.ViewModels
             IsLoading = false;
         }
 
-        public int? InReplyToStatusId { get; set; }
-
         private ObservableCollection<PhotoFileInfo> _photoList;
 
         public ObservableCollection<PhotoFileInfo> PhotoList
@@ -44,6 +42,17 @@ namespace WinMasto.ViewModels
             set
             {
                 Set(ref _sensitive, value);
+            }
+        }
+
+        private Status _replyStatus;
+
+        public Status ReplyStatus
+        {
+            get { return _replyStatus; }
+            set
+            {
+                Set(ref _replyStatus, value);
             }
         }
 
@@ -88,14 +97,25 @@ namespace WinMasto.ViewModels
         public async Task SendStatus()
         {
             // TODO: This is for testing the postStatus function. Make this more generic.
+            IsLoading = true;
             if (string.IsNullOrEmpty(Status) || Status.Length > 500) return;
             IEnumerable<int> mediaIds = null;
             if (PhotoList.Any())
             {
                 mediaIds = PhotoList.Select(node => node.Attachment.Id);
             }
-            var result = await Client.PostStatus(Status, Visibility.Public, InReplyToStatusId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
-            await NavigationService.NavigateAsync(typeof(MainPage));
+            int? replyId = null;
+            if (ReplyStatus != null) replyId = ReplyStatus.Id;
+            try
+            {
+                var result = await Client.PostStatus(Status, Visibility.Public, replyId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
+                await NavigationService.NavigateAsync(typeof(MainPage));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            IsLoading = false;
         }
     }
 }

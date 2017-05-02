@@ -32,18 +32,18 @@
 
         <controls:HamburgerMenu Grid.Row="1" x:Name="MyHamburgerMenu" 
                                 SecondaryButtonOrientation="Vertical"
+                                NavButtonForeground="{ThemeResource NavButtonForegroundColor}"
+                                NavButtonCheckedForeground="{ThemeResource NavButtonCheckedForegroundColor}"
+                                NavButtonHoverForeground="{ThemeResource NavButtonHoverForegroundColor}"
+                                HamburgerForeground="{ThemeResource HamburgerForegroundColor}"
                                 VisualStateNarrowMinWidth="320"
                                 VisualStateNormalMinWidth="720"
-                                NavButtonForeground="White"
-                                NavButtonCheckedForeground="White"
-                                NavButtonHoverForeground="White"
-                                HamburgerForeground="White"
                                 VisualStateWideMinWidth="1020">
             <controls:HamburgerMenu.HamburgerBackground>
                 <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
             </controls:HamburgerMenu.HamburgerBackground>
             <controls:HamburgerMenu.NavAreaBackground>
-                <brushes:HostBlurBrush BlurColor="Black" BlurAmount="20"/>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
             </controls:HamburgerMenu.NavAreaBackground>
             <controls:HamburgerMenu.NavButtonCheckedBackground>
                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".50"></SolidColorBrush>

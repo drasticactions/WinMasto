@@ -6,4 +6,9 @@
     <Color x:Key="StatusTextColor">#FFFFFF</Color>
     <Color x:Key="StatusBackground">Black</Color>
     <SolidColorBrush x:Key="MainPageBackground" Color="Black"/>
+    <SolidColorBrush x:Key="NavButtonForegroundColor">White</SolidColorBrush>
+    <SolidColorBrush x:Key="NavButtonCheckedForegroundColor">White</SolidColorBrush>
+    <SolidColorBrush x:Key="NavButtonHoverForegroundColor">White</SolidColorBrush>
+    <SolidColorBrush x:Key="HamburgerForegroundColor">White</SolidColorBrush>
+    <Color x:Key="NavAreaBackgroundColor">#2B2B2B</Color>
 </ResourceDictionary>

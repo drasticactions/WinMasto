@@ -40,8 +40,8 @@ namespace WinMasto.ViewModels
             {
                 
                 var appRegistration = await GetAppRegistration();
-                var client = new MastodonClient(appRegistration);
-                var oauthUrl = client.OAuthUrl((string.Format(_serverRedirect, Server)));
+                var authClient = new AuthenticationClient(appRegistration);
+                var oauthUrl = authClient.OAuthUrl((string.Format(_serverRedirect, Server)));
                 var webAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(
                     WebAuthenticationOptions.None,
                     new Uri(oauthUrl),
@@ -73,9 +73,9 @@ namespace WinMasto.ViewModels
                 }
                 else
                 {
-                    var auth = await client.ConnectWithCode(code, string.Format(_serverRedirect, Server));
+                    var auth = await authClient.ConnectWithCode(code, string.Format(_serverRedirect, Server));
                     SettingsService.UserAuth = auth;
-                    client = new MastodonClient(appRegistration, auth.AccessToken);
+                    var client = new MastodonClient(appRegistration, auth);
                     var account = await client.GetCurrentUser();
                     SettingsService.UserAccount = account;
                     SettingsService.Instance.ServerInstance = Server;
@@ -105,7 +105,8 @@ namespace WinMasto.ViewModels
 
         private async Task<AppRegistration> GetAppRegistration()
         {
-            var appRegistration = await MastodonClient.CreateApp(Server, "WinMasto", Scope.Read | Scope.Write | Scope.Follow, null, "https://" + Server + "/oauth/authorize/");
+            var authClient = new AuthenticationClient(Server);
+            var appRegistration = await authClient.CreateApp("WinMasto", Scope.Read | Scope.Write | Scope.Follow, null, "https://" + Server + "/oauth/authorize/");
             SettingsService.Instance.AppRegistrationService = appRegistration;
             return appRegistration;
         }

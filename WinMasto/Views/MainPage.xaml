@@ -15,6 +15,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
+    xmlns:brushes="using:WinMasto.Brushes"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -282,6 +283,9 @@
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
+            <Grid.Background>
+                <brushes:HostBlurBrush BlurColor="Black" BlurAmount="20"/>
+            </Grid.Background>
             <communitycontrols:PullToRefreshListView OverscrollLimit="0.27" PullThreshold="79"
                                                      RefreshRequested="ListView_RefreshCommand"
                                                      IsPullToRefreshWithMouseEnabled="True"

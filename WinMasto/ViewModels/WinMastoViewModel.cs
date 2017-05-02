@@ -52,7 +52,7 @@ namespace WinMasto.ViewModels
             var instance = SettingsService.Instance.ServerInstance;
             if (appRegistration == null || userAuth == null) return;
             appRegistration.Instance = instance;
-            Client = new MastodonClient(appRegistration, userAuth.AccessToken);
+            Client = new MastodonClient(appRegistration, new Auth(){ AccessToken = userAuth.AccessToken });
             UserAccount = SettingsService.Instance.UserAccount;
             IsLoggedIn = true;
         }

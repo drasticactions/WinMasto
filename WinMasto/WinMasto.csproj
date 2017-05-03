@@ -18,6 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>WinMasto_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>FD1FD1D84A7F820B783AAAEF1435A49E672B4FC6</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -158,7 +159,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="WinMasto_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\Icon2.png" />
@@ -277,7 +277,9 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="WinMasto_TemporaryKey.pfx" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mastonet\Mastonet\Mastonet.csproj">
       <Project>{edfaaa19-e2bd-4e6b-8951-2ad9e885df8c}</Project>

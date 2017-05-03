@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinMasto", "WinMasto\WinMasto.csproj", "{FB36363D-A808-424B-A9CD-8952C4AACC93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{C67AF6DF-62C3-4E68-81EF-F81FBC026E2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastonet", "Mastonet\Mastonet\Mastonet.csproj", "{EDFAAA19-E2BD-4E6B-8951-2AD9E885DF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastonet", "Mastonet\Mastonet\Mastonet.csproj", "{EDFAAA19-E2BD-4E6B-8951-2AD9E885DF8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +22,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|Any CPU.Build.0 = Debug|x86
+		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|ARM.ActiveCfg = Debug|ARM
 		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|ARM.Build.0 = Debug|ARM
 		{FB36363D-A808-424B-A9CD-8952C4AACC93}.Debug|ARM.Deploy.0 = Debug|ARM

@@ -27,6 +27,7 @@
             <converters:ThumbnailToImageConverter x:Key="ThumbnailToImageConverter" />
             <templateSelector:StatusTemplateSelector x:Key="StatusTemplateSelector"/>
             <templateSelector:MediaAttachmentTemplateSelector x:Key="MediaAttachmentTemplateSelector"/>
+            <converters:ReplyToStatusConverter x:Key="ReplyToStatusConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

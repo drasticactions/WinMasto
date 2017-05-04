@@ -58,6 +58,11 @@ namespace WinMasto.ViewModels
 
         }
 
+        public async Task ShowStatusOption(Status status)
+        {
+            await NavigationService.NavigateAsync(typeof(StatusPage), status);
+        }
+
         public async Task PullToRefresh()
         {
             await Statuses.PullToRefresh();

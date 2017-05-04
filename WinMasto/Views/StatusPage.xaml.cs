@@ -13,8 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
-using Microsoft.Toolkit.Uwp.UI.Animations;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using WinMasto.Controls;
 using WinMasto.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -24,15 +24,14 @@ namespace WinMasto.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class StatusPage : Page
     {
-        public MainPage()
+        public StatusPageViewModel ViewModel => this.DataContext as StatusPageViewModel;
+
+        public StatusPage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
-
-        public MainPageViewModel ViewModel => this.DataContext as MainPageViewModel;
 
         private async void Mention_OnClick(object sender, RoutedEventArgs e)
         {
@@ -88,17 +87,17 @@ namespace WinMasto.Views
 
         private void ImageItem_OnClick(object sender, ItemClickEventArgs e)
         {
-            var attachment = e.ClickedItem as Attachment;
-            if (attachment == null) return;
+            //var attachment = e.ClickedItem as Attachment;
+            //if (attachment == null) return;
 
-            var grid = sender as AdaptiveGridView;
-            if (grid == null) return;
+            //var grid = sender as AdaptiveGridView;
+            //if (grid == null) return;
 
-            var status = grid.DataContext as Status;
-            if (status == null) return;
-            ImageGalleryView.ViewModel.SetStatus(status, attachment);
-            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
-            flyoutBase.ShowAt(StatusGrid);
+            //var status = grid.DataContext as Status;
+            //if (status == null) return;
+            //ImageGalleryView.ViewModel.SetStatus(status, attachment);
+            //FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
+            //flyoutBase.ShowAt(StatusGrid);
         }
 
         private async void ShowNSFWPost_OnClick(object sender, RoutedEventArgs e)

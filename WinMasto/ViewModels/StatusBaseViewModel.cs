@@ -31,12 +31,26 @@ namespace WinMasto.ViewModels
 
         public async Task BlockOption(Status status)
         {
-
+            try
+            {
+                var result = await Client.Block(status.Account.Id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         public async Task MuteOption(Status status)
         {
-
+            try
+            {
+                var result = await Client.Mute(status.Account.Id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         public async Task ReportOption(Status status)

@@ -87,17 +87,17 @@ namespace WinMasto.Views
 
         private void ImageItem_OnClick(object sender, ItemClickEventArgs e)
         {
-            //var attachment = e.ClickedItem as Attachment;
-            //if (attachment == null) return;
+            var attachment = e.ClickedItem as Attachment;
+            if (attachment == null) return;
 
-            //var grid = sender as AdaptiveGridView;
-            //if (grid == null) return;
+            var grid = sender as AdaptiveGridView;
+            if (grid == null) return;
 
-            //var status = grid.DataContext as Status;
-            //if (status == null) return;
-            //ImageGalleryView.ViewModel.SetStatus(status, attachment);
-            //FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
-            //flyoutBase.ShowAt(StatusGrid);
+            var status = grid.DataContext as Status;
+            if (status == null) return;
+            ImageGalleryView.ViewModel.SetStatus(status, attachment);
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(StatusGrid);
+            flyoutBase.ShowAt(StatusGrid);
         }
 
         private async void ShowNSFWPost_OnClick(object sender, RoutedEventArgs e)

@@ -2,10 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinMasto.Styles">
-    <SolidColorBrush x:Key="MainPageBackground" Color="#E5E5E5"/>
+    <SolidColorBrush x:Key="MainPageBackground" Color="White"/>
     <Color x:Key="StatusBackground">#E5E5E5</Color>
     <Color x:Key="LoadingBackground">#FFFFFF</Color>
     <Color x:Key="StatusTextColor">#000000</Color>
+    <Color x:Key="SystemAccentColor">White</Color>
     <SolidColorBrush x:Key="NavButtonForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonCheckedForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonHoverForegroundColor">Black</SolidColorBrush>

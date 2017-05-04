@@ -46,39 +46,48 @@ namespace WinMasto.Tools
         {
             IsLoading = true;
             IEnumerable<Status> statuses;
-            ArrayOptions options = new ArrayOptions();
-            if (pullToRefresh)
+            try
             {
-                if (this.Any())
+                ArrayOptions options = new ArrayOptions();
+                if (pullToRefresh)
                 {
-                    options.SinceId = this.First().Id;
+                    if (this.Any())
+                    {
+                        options.SinceId = this.First().Id;
+                    }
                 }
-            }
-            else
-            {
-                if (_maxId > 0)
+                else
                 {
-                    options.MaxId = _maxId;
+                    if (_maxId > 0)
+                    {
+                        options.MaxId = _maxId;
+                    }
                 }
-            }
 
-            switch (_path)
+                switch (_path)
+                {
+                    case "home":
+                        statuses = await _client.GetHomeTimeline(options);
+                        break;
+                    case "public":
+                        statuses = await _client.GetPublicTimeline(options);
+                        break;
+                    case "local":
+                        statuses = await _client.GetPublicTimeline(options, true);
+                        break;
+                    case "account":
+                        statuses = await _client.GetAccountStatuses(_accountId, options);
+                        break;
+                    default:
+                        statuses = await _client.GetHomeTimeline(options);
+                        break;
+                }
+            }
+            catch (Exception e)
             {
-                case "home":
-                    statuses = await _client.GetHomeTimeline(options);
-                    break;
-                case "public":
-                    statuses = await _client.GetPublicTimeline(options);
-                    break;
-                case "local":
-                    statuses = await _client.GetPublicTimeline(options, true);
-                    break;
-                case "account":
-                    statuses = await _client.GetAccountStatuses(_accountId, options);
-                    break;
-                default:
-                    statuses = await _client.GetHomeTimeline(options);
-                    break;
+                // TODO: Show error
+                Console.WriteLine(e);
+                statuses = new List<Status>();
             }
             IsLoading = false;
             return statuses;

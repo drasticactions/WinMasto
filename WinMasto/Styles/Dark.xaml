@@ -5,6 +5,7 @@
     <Color x:Key="LoadingBackground">#000000</Color>
     <Color x:Key="StatusTextColor">#FFFFFF</Color>
     <Color x:Key="StatusBackground">Black</Color>
+    <Color x:Key="SystemAccentColor">#2B2B2B</Color>
     <SolidColorBrush x:Key="MainPageBackground" Color="Black"/>
     <SolidColorBrush x:Key="NavButtonForegroundColor">White</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonCheckedForegroundColor">White</SolidColorBrush>

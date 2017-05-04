@@ -273,7 +273,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls1:PageHeader Foreground="White" BackButtonVisibility="Collapsed"  Content="{Binding Title}" Frame="{x:Bind Frame}">
+        <controls1:PageHeader BackButtonVisibility="Collapsed"  Content="{Binding Title}" Frame="{x:Bind Frame}">
             <controls1:PageHeader.Background>
                 <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
             </controls1:PageHeader.Background>

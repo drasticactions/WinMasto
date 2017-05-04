@@ -16,15 +16,11 @@
     </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="TitleBarGrid">
-            <Grid.Background>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="100"/>
-            </Grid.Background>
-
+        <Grid x:Name="TitleBarGrid" Background="{ThemeResource SystemAccentColor}">
             <Grid x:Name="TitleBarContentGrid">
                 <TextBlock x:Name="TitleBarTextBlock" FontSize="12" VerticalAlignment="Center"/>
             </Grid>
@@ -41,7 +37,7 @@
                                 VisualStateNormalMinWidth="720"
                                 VisualStateWideMinWidth="1020">
             <controls:HamburgerMenu.HamburgerBackground>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
             </controls:HamburgerMenu.HamburgerBackground>
             <controls:HamburgerMenu.NavAreaBackground>
                 <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>

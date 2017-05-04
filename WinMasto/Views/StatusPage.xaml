@@ -34,7 +34,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -150,14 +150,14 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Rectangle Grid.Row="2"  Fill="Gray"/>
+                <Rectangle Grid.Row="2" Height="1" VerticalAlignment="Top" Fill="Gray"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Name="RegularStatusDataTemplate">
             <Grid MaxWidth="700" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -259,7 +259,7 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Rectangle Grid.Row="1"  Fill="Gray"/>
+                <Rectangle Grid.Row="1" Height="1" VerticalAlignment="Top" Fill="Gray"/>
             </Grid>
         </DataTemplate>
         <templateSelector:StatusTemplateSelector x:Name="StatusTemplateSelector" ReblogStatusDataTemplate="{StaticResource ReblogRegularStatusDataTemplate}" RegularStatusDataTemplate="{StaticResource RegularStatusDataTemplate}"/>
@@ -296,6 +296,54 @@
         </Grid>
     </Grid>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

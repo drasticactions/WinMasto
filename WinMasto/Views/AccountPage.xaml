@@ -34,7 +34,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -144,21 +144,20 @@
                                         <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
                                         <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
                                         <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
-                                        <MenuFlyoutItem Click="Report_OnClick" CommandParameter="{Binding}" Text="Report"/>
                                     </MenuFlyout>
                                 </Button.Flyout>
                             </Button>
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Rectangle Grid.Row="2"  Fill="Gray"/>
+                <Rectangle Grid.Row="2" Height="1" VerticalAlignment="Top" Fill="Gray"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Name="RegularStatusDataTemplate">
             <Grid MaxWidth="700" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -210,7 +209,7 @@
                                                 Background="White"
                                                 BorderBrush="Black"
                                                 BorderThickness="1">
-                                                <Image
+                                                <controls:ImageEx
                                                     Source="{Binding PreviewUrl}"
                                                     Stretch="UniformToFill"
                                                     HorizontalAlignment="Center"
@@ -260,7 +259,7 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Rectangle Grid.Row="1"  Fill="Gray"/>
+                <Rectangle Grid.Row="1" Height="1" VerticalAlignment="Top" Fill="Gray"/>
             </Grid>
         </DataTemplate>
         <templateSelector:StatusTemplateSelector x:Name="StatusTemplateSelector" ReblogStatusDataTemplate="{StaticResource ReblogRegularStatusDataTemplate}" RegularStatusDataTemplate="{StaticResource RegularStatusDataTemplate}"/>
@@ -347,6 +346,84 @@
         </Grid>
     </Grid>
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

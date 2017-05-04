@@ -50,7 +50,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" FontWeight="Bold" Margin="5" Text="{Binding ReplyStatus, Converter={StaticResource ReplyToStatusConverter}}"></TextBlock>
-            <TextBox x:Name="StatusTextBox" Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
+            <TextBox x:Name="StatusTextBox" TextWrapping="Wrap" Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
         </Grid>
         <controls1:AdaptiveGridView 
             OneRowModeEnabled="False"

@@ -16,11 +16,14 @@
     </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="TitleBarGrid" Background="{ThemeResource SystemAccentColor}">
+        <Grid x:Name="TitleBarGrid">
+            <Grid.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
+            </Grid.Background>
             <Grid x:Name="TitleBarContentGrid">
                 <TextBlock x:Name="TitleBarTextBlock" FontSize="12" VerticalAlignment="Center"/>
             </Grid>

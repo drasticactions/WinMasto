@@ -58,7 +58,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Top" Height="50" Source="{Binding Reblog.Account.AvatarUrl}"/>
-                    <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#96000000" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
+                    <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource MainPageBackground}" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>
                             <Button CommandParameter="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Click="ShowNSFWPost_OnClick" Content="Show"/>
@@ -166,7 +166,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Top" Height="50" Source="{Binding Account.AvatarUrl}"/>
-                    <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#96000000" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
+                    <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource MainPageBackground}" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>
                             <Button CommandParameter="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Click="ShowNSFWPost_OnClick" Content="Show"/>

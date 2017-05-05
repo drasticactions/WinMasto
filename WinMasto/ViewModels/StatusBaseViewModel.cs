@@ -19,6 +19,8 @@ namespace WinMasto.ViewModels
 
         public TimelineScrollingCollection Statuses { get; set; }
 
+        public NotificationScrollingCollection Notifications { get; set; }
+
         public async Task ReplyOption(Status status)
         {
             await NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsReply = true, Status = status});
@@ -68,6 +70,11 @@ namespace WinMasto.ViewModels
             await Statuses.PullToRefresh();
         }
 
+        public async Task PullToRefreshNotifications()
+        {
+            await Notifications.PullToRefresh();
+        }
+
         public async Task NavigateToAccountPage(Account account)
         {
             await NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(account));
@@ -80,6 +87,16 @@ namespace WinMasto.ViewModels
             newStatus.SpoilerText = string.Empty;
             var index = Statuses.IndexOf(status);
             Statuses[index] = newStatus;
+        }
+
+        public async Task ShowNSFWPostNotifications(Notification notification)
+        {
+            Status newStatus = notification.Status;
+            var index = Notifications.IndexOf(notification);
+            newStatus.Sensitive = false;
+            newStatus.SpoilerText = string.Empty;
+            notification.Status = newStatus;
+            Notifications[index] = notification;
         }
 
         public async Task ReShareOption(Status status)

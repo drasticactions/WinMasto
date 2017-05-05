@@ -86,6 +86,17 @@
                                    Text="Federated" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageType="local:NotificationPage">
+                    <StackPanel Orientation="Horizontal">
+                        <uwp:FontAwesome
+                            Width="48"
+                            Height="48"
+                            Icon="Bell" />
+                        <TextBlock Margin="12,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Text="Notifications" />
+                    </StackPanel>
+                </controls:HamburgerButtonInfo>
                 <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageType="local:AccountPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48"

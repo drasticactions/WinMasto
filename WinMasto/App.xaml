@@ -28,6 +28,7 @@
             <templateSelector:StatusTemplateSelector x:Key="StatusTemplateSelector"/>
             <templateSelector:MediaAttachmentTemplateSelector x:Key="MediaAttachmentTemplateSelector"/>
             <converters:ReplyToStatusConverter x:Key="ReplyToStatusConverter" />
+            <converters:FollowYouConverter x:Key="FollowYouConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

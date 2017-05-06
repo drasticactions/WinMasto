@@ -105,9 +105,16 @@ namespace WinMasto.ViewModels
             }
         }
 
+        public Visibility StatusVisibility { get; set; }
+
         public void StatusTextBox_OnChanged(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            StatusCount = 500 - SpoilerText.Length - Status.Length;
+            StatusCount = 500 - sender.Text.Length - SpoilerText.Length;
+        }
+
+        public void SpoilerTextBox_OnChanged(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            StatusCount = 500 - sender.Text.Length - Status.Length;
         }
 
         public async Task SendStatus()
@@ -124,7 +131,7 @@ namespace WinMasto.ViewModels
             if (ReplyStatus != null) replyId = ReplyStatus.Id;
             try
             {
-                var result = await Client.PostStatus(Status, Visibility.Public, replyId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
+                var result = await Client.PostStatus(Status, StatusVisibility, replyId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
                 await NavigationService.NavigateAsync(typeof(MainPage), "home");
             }
             catch (Exception e)

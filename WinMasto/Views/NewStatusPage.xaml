@@ -65,7 +65,7 @@
                      Visibility="{Binding Sensitive, Converter={StaticResource BooleanToVisibilityConverter}}"
                      PlaceholderText="Content Warning" 
                      Style="{StaticResource StatusTextBoxStyle}" 
-                     TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" 
+                     TextChanging="{x:Bind ViewModel.SpoilerTextBox_OnChanged}" 
                      AcceptsReturn="True" Margin="5" 
                      Text="{Binding SpoilerText, Mode=TwoWay}"/>
         </Grid>
@@ -111,9 +111,15 @@
                     <Button Margin="0,0,5,0" Click="SelectPhotos_OnClick" Style="{StaticResource StatusButtonStyle}">
                         <SymbolIcon Symbol="Camera"/>
                     </Button>
-                    <Button Click="ChangeSpoilerMode_OnClick" Style="{StaticResource StatusButtonStyle}">
+                    <Button Margin="0,0,5,0" Click="ChangeSpoilerMode_OnClick" Style="{StaticResource StatusButtonStyle}">
                         <SymbolIcon Symbol="{Binding Sensitive, Converter={StaticResource SpoilerIconConverter}}"/>
                     </Button>
+                    <ComboBox x:Name="VisibilityListBox" SelectionChanged="VisibilityChanged_OnClick" Margin="0,0,5,0">
+                        <ComboBoxItem>Public</ComboBoxItem>
+                        <ComboBoxItem>Unlisted</ComboBoxItem>
+                        <ComboBoxItem>Private</ComboBoxItem>
+                        <ComboBoxItem>Direct</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">

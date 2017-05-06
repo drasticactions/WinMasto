@@ -31,6 +31,7 @@ namespace WinMasto.Views
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Disabled;
+            VisibilityListBox.SelectedIndex = 0;
         }
 
         public NewStatusPageViewModel ViewModel => this.DataContext as NewStatusPageViewModel;
@@ -89,6 +90,11 @@ namespace WinMasto.Views
         private void ChangeSpoilerMode_OnClick(object sender, RoutedEventArgs e)
         {
             ViewModel.Sensitive = !ViewModel.Sensitive;
+        }
+
+        private void VisibilityChanged_OnClick(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.StatusVisibility = (Mastonet.Visibility) VisibilityListBox.SelectedIndex;
         }
     }
 }

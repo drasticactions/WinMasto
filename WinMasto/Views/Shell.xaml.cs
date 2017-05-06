@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -68,11 +69,14 @@ namespace WinMasto.Views
 
             var view = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
             TitleBarTextBlock.Text = Package.Current.DisplayName;
-
             view.TitleBar.BackgroundColor = Colors.Transparent;
             view.TitleBar.InactiveBackgroundColor = Colors.Transparent;
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                TitleBarGrid.Height = 0;
+            }
         }
     }
 }

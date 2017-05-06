@@ -13,8 +13,9 @@ namespace WinMasto.Tools.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var accountDateTime = (DateTime) value;
-            var timespan = DateTime.UtcNow.Subtract(accountDateTime);
-            return timespan.ToPrettyString(2, UnitStringRepresentation.Compact);
+            return accountDateTime.ToLocalTime().ToString("g");
+            //var timespan = DateTime.UtcNow.Subtract(accountDateTime);
+            //return timespan.ToPrettyString(2, UnitStringRepresentation.Compact);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

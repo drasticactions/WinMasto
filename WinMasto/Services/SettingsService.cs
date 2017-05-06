@@ -101,12 +101,21 @@ namespace WinMasto.Services
             }
         }
 
-        public DateTime LastRefresh
+        public DateTime LastRefreshToast
         {
-            get { return _helper.Read<DateTime>(nameof(LastRefresh), DateTime.Now); }
+            get { return _helper.Read<DateTime>(nameof(LastRefreshToast), DateTime.UtcNow); }
             set
             {
-                _helper.Write(nameof(LastRefresh), value);
+                _helper.Write(nameof(LastRefreshToast), value);
+            }
+        }
+
+        public DateTime LastRefreshTile
+        {
+            get { return _helper.Read<DateTime>(nameof(LastRefreshTile), DateTime.UtcNow); }
+            set
+            {
+                _helper.Write(nameof(LastRefreshTile), value);
             }
         }
 

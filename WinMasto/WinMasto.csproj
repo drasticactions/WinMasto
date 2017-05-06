@@ -96,7 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BackgroundTasks\BackgroundTaskUtils.cs" />
+    <Compile Include="Tools\BackgroundTasks\BackgroundTaskUtils.cs" />
     <Compile Include="Brushes\HostBlurBrush.cs" />
     <Compile Include="Controls\ImageGalleryView.xaml.cs">
       <DependentUpon>ImageGalleryView.xaml</DependentUpon>

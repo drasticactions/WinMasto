@@ -115,6 +115,7 @@
     <Compile Include="Tools\Converters\ImageGalleryVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\OpenMenuFlyoutAction.cs" />
     <Compile Include="Tools\Converters\ReplyToStatusConverter.cs" />
+    <Compile Include="Tools\Converters\SpoilerIconConverter.cs" />
     <Compile Include="Tools\Converters\SpoilerOrNSFWConverter.cs" />
     <Compile Include="Tools\Converters\StripHtmlConverter.cs" />
     <Compile Include="Tools\Converters\ThumbnailToImageConverter.cs" />

@@ -85,5 +85,10 @@ namespace WinMasto.Views
             StatusTextBox.Text = newText;
             ViewModel.PhotoList.Remove(status);
         }
+
+        private void ChangeSpoilerMode_OnClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Sensitive = !ViewModel.Sensitive;
+        }
     }
 }

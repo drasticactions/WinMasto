@@ -48,9 +48,26 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" FontWeight="Bold" Margin="5" Text="{Binding ReplyStatus, Converter={StaticResource ReplyToStatusConverter}}"></TextBlock>
-            <TextBox x:Name="StatusTextBox" TextWrapping="Wrap" Grid.Row="1" PlaceholderText="What is on your mind?" Style="{StaticResource StatusTextBoxStyle}" TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" AcceptsReturn="True" Margin="5" Text="{Binding Status, Mode=TwoWay}"/>
+            <TextBox x:Name="StatusTextBox" 
+                     TextWrapping="Wrap" 
+                     Grid.Row="1" 
+                     PlaceholderText="What is on your mind?" 
+                     Style="{StaticResource StatusTextBoxStyle}" 
+                     TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" 
+                     AcceptsReturn="True" Margin="5" 
+                     Text="{Binding Status, Mode=TwoWay}"/>
+            <TextBox x:Name="SpoilerTextBox" 
+                     TextWrapping="Wrap" 
+                     Grid.Row="2"
+                     Visibility="{Binding Sensitive, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     PlaceholderText="Content Warning" 
+                     Style="{StaticResource StatusTextBoxStyle}" 
+                     TextChanging="{x:Bind ViewModel.StatusTextBox_OnChanged}" 
+                     AcceptsReturn="True" Margin="5" 
+                     Text="{Binding SpoilerText, Mode=TwoWay}"/>
         </Grid>
         <controls1:AdaptiveGridView 
             OneRowModeEnabled="False"
@@ -90,9 +107,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <Button Click="SelectPhotos_OnClick" Style="{StaticResource StatusButtonStyle}">
-                    <SymbolIcon Symbol="Camera"/>
-                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="0,0,5,0" Click="SelectPhotos_OnClick" Style="{StaticResource StatusButtonStyle}">
+                        <SymbolIcon Symbol="Camera"/>
+                    </Button>
+                    <Button Click="ChangeSpoilerMode_OnClick" Style="{StaticResource StatusButtonStyle}">
+                        <SymbolIcon Symbol="{Binding Sensitive, Converter={StaticResource SpoilerIconConverter}}"/>
+                    </Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,10,0" Text="{Binding StatusCount, Mode=TwoWay}"/>

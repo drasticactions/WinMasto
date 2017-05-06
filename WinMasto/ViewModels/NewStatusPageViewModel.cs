@@ -107,7 +107,7 @@ namespace WinMasto.ViewModels
 
         public void StatusTextBox_OnChanged(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            StatusCount = 500 - sender.Text.Length;
+            StatusCount = 500 - SpoilerText.Length - Status.Length;
         }
 
         public async Task SendStatus()
@@ -125,7 +125,7 @@ namespace WinMasto.ViewModels
             try
             {
                 var result = await Client.PostStatus(Status, Visibility.Public, replyId, mediaIds, Sensitive, SpoilerText.Any() ? SpoilerText : null);
-                await NavigationService.NavigateAsync(typeof(MainPage));
+                await NavigationService.NavigateAsync(typeof(MainPage), "home");
             }
             catch (Exception e)
             {

@@ -436,6 +436,9 @@
                         <Rectangle Grid.Row="1" Height="1" VerticalAlignment="Top" Fill="Gray"/>
                     </Grid>
                 </ListView.Header>
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:FadeHeaderBehavior />
+                </interactivity:Interaction.Behaviors>
             </ListView>
             <FlyoutBase.AttachedFlyout>
                 <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">

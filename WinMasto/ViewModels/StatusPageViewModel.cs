@@ -22,7 +22,7 @@ namespace WinMasto.ViewModels
                 IsLoading = false;
                 return;
             }
-            SelectedStatus = status;
+            SelectedStatus = status.Reblog ?? status;
             Others = new ObservableCollection<Status>();
             Title = status.Account.AccountName;
             Card = await Client.GetStatusCard(status.Id);

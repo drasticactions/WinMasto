@@ -7,10 +7,10 @@ using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 using Newtonsoft.Json;
 using Template10.Services.SettingsService;
-using WinMasto.Windows.Core.Notifications;
+using WinMasto.Core.Notifications;
 
 namespace WinMasto.BackgroundNotify
-{
+{ 
     public sealed class ToastNotificationBackgroundTask : IBackgroundTask
     {
 

@@ -7,7 +7,7 @@ using Windows.ApplicationModel.Background;
 using Mastonet;
 using Mastonet.Entities;
 using Newtonsoft.Json;
-using WinMasto.Windows.Core.Notifications;
+using WinMasto.Core.Notifications;
 
 namespace WinMasto.BackgroundNotify
 {
@@ -27,7 +27,7 @@ namespace WinMasto.BackgroundNotify
             var appRegistrationString = _helper.Read<string>("AppRegistrationService", null);
             if (string.IsNullOrEmpty(appRegistrationString)) return false;
             var appRegistration = JsonConvert.DeserializeObject<AppRegistration>(appRegistrationString);
-            var userAuthString = _helper.Read<string>("UserAccount", null);
+            var userAuthString = _helper.Read<string>("UserAuth", null);
             if (string.IsNullOrEmpty(userAuthString)) return false;
             var userAuth = JsonConvert.DeserializeObject<Auth>(userAuthString);
             var instance = _helper.Read<string>("ServerInstance", null);
@@ -76,7 +76,7 @@ namespace WinMasto.BackgroundNotify
         {
             var notifications = await _client.GetNotifications();
             var newNotifications = notifications.Where(node => node.CreatedAt > lastRefreshTime);
-            foreach (var notification in newNotifications)
+            foreach (var notification in notifications)
             {
                 NotifyStatusTile.CreateToastNotification(notification);
             }
@@ -86,7 +86,7 @@ namespace WinMasto.BackgroundNotify
         {
             var notifications = await _client.GetNotifications();
             var newNotifications = notifications.Where(node => node.CreatedAt > lastRefreshTime);
-            foreach (var notification in newNotifications)
+            foreach (var notification in notifications)
             {
                 NotifyStatusTile.CreateNotificationLiveTile(notification);
             }

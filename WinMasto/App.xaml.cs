@@ -6,11 +6,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,9 +21,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
 using Template10.Common;
 using Template10.Controls;
+using WinMasto.Core.Notifications;
 using WinMasto.Services;
+using WinMasto.Tools.BackgroundTasks;
 
 namespace WinMasto
 {
@@ -60,7 +65,26 @@ namespace WinMasto
 
         private async void SetupBackgroundServices()
         {
-            
+            IsIoT = ApiInformation.IsTypePresent("Windows.Devices.Gpio.GpioController");
+
+            if (IsIoT) return;
+
+            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+            BackgroundTaskUtils.UnregisterBackgroundTasks(BackgroundTaskUtils.ToastBackgroundTaskName);
+            var task2 = await
+                BackgroundTaskUtils.RegisterBackgroundTask(BackgroundTaskUtils.ToastBackgroundTaskEntryPoint,
+                    BackgroundTaskUtils.ToastBackgroundTaskName, new ToastNotificationActionTrigger(),
+                    null);
+
+            if (SettingsService.Instance.BackgroundEnable)
+            {
+                BackgroundTaskUtils.UnregisterBackgroundTasks(BackgroundTaskUtils.BackgroundTaskName);
+                var task = await
+                    BackgroundTaskUtils.RegisterBackgroundTask(BackgroundTaskUtils.BackgroundTaskEntryPoint,
+                        BackgroundTaskUtils.BackgroundTaskName,
+                        new TimeTrigger(15, false),
+                        null);
+            }
         }
 
         private async Task SetupStartupLocation(StartKind startKind, IActivatedEventArgs args)
@@ -70,27 +94,30 @@ namespace WinMasto
             //    // await NavigationService.NavigateAsync(typeof(XboxViews.MainPage));
             //    return;
             //}
-            //try
-            //{
-            //    if (startKind == StartKind.Activate)
-            //    {
-            //        if (args.Kind == ActivationKind.ToastNotification)
-            //            StartupFromToast(args);
-            //        if (args.Kind == ActivationKind.VoiceCommand)
-            //            await StartupFromVoice(args);
-            //        if (args.Kind == ActivationKind.Protocol)
-            //            StartupFromProtocol(args);
-            //    }
-            //    else
-            //    {
-            //        await NavigationService.NavigateAsync(typeof(Views.MainPage));
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    // If all else fails, go to the main page.
-            //    await NavigationService.NavigateAsync(typeof(Views.MainPage));
-            //}
+            try
+            {
+                if (startKind == StartKind.Activate)
+                {
+                    if (args.Kind == ActivationKind.ToastNotification)
+                    {
+                        StartupFromToast(args);
+                    }
+                    return;
+                    //if (args.Kind == ActivationKind.VoiceCommand)
+                    //    await StartupFromVoice(args);
+                    //if (args.Kind == ActivationKind.Protocol)
+                    //    StartupFromProtocol(args);
+                }
+                else
+                {
+                    await NavigationService.NavigateAsync(typeof(Views.MainPage), "home");
+                }
+            }
+            catch (Exception)
+            {
+                // If all else fails, go to the main page.
+                await NavigationService.NavigateAsync(typeof(Views.MainPage), "home");
+            }
 
             var login = SettingsService.Instance.UserAuth;
             if (login == null)
@@ -100,6 +127,26 @@ namespace WinMasto
             else
             {
                 await NavigationService.NavigateAsync(typeof(Views.MainPage), "home");
+            }
+        }
+
+        private async void StartupFromToast(IActivatedEventArgs args)
+        {
+            var toastArgs = args as ToastNotificationActivatedEventArgs;
+            if (toastArgs == null)
+                throw new Exception("Not Toast Arguments!");
+            var arguments = JsonConvert.DeserializeObject<ToastNotificationArgs>(toastArgs.Argument);
+            switch (arguments.Type)
+            {
+                case ToastType.Account:
+                    await NavigationService.NavigateAsync(typeof(Views.AccountPage), arguments.Account);
+                    break;
+                case ToastType.Status:
+                    await NavigationService.NavigateAsync(typeof(Views.StatusPage), arguments.Status);
+                    break;
+                default:
+                    await NavigationService.NavigateAsync(typeof(Views.MainPage), "home");
+                    break;
             }
         }
 
@@ -156,7 +203,9 @@ namespace WinMasto
                 Application.Current.Resources["SystemControlHighlightAccentBrush"] = Colors.Black;
             }
         }
-
+        #region iot
+        public static bool IsIoT { get; private set; } = false;
+        #endregion
         #region Xbox
         public static bool IsTenFootPC { get; private set; } = false;
 

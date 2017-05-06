@@ -60,7 +60,7 @@
                                       IsOn="{Binding UseBackgroundLiveTile, Mode=TwoWay}"
                                       OffContent="Off" OnContent="On" />
                         <TextBlock Margin="0,0,0,20" x:Name="BookmarkBackgroundSwitchText" RelativePanel.Below="UseBookmarkBackground" TextWrapping="Wrap">Enables the WinMasto live tile to show current toots</TextBlock>
-                        <ToggleSwitch x:Name="UseBookmarkNotification" RelativePanel.Below="BookmarkBackgroundSwitchText" Header="Enable Bookmark Notifications"
+                        <ToggleSwitch x:Name="UseBookmarkNotification" RelativePanel.Below="BookmarkBackgroundSwitchText" Header="Enable Toast Notifications"
                                       IsOn="{Binding UseBackgroundNotify, Mode=TwoWay}"
                                       OffContent="Off" OnContent="On" />
                         <TextBlock Margin="0,0,0,20" x:Name="BookmarkNotificationSwitchText" RelativePanel.Below="UseBookmarkNotification" TextWrapping="Wrap">Get toast notifications when events happen on Mastodon</TextBlock>

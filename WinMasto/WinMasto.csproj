@@ -353,6 +353,14 @@
       <Project>{edfaaa19-e2bd-4e6b-8951-2ad9e885df8c}</Project>
       <Name>Mastonet</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WinMasto.BackgroundNotify\WinMasto.BackgroundNotify.csproj">
+      <Project>{42563203-74bf-4c1d-9058-58b9fcf81089}</Project>
+      <Name>WinMasto.BackgroundNotify</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinMasto.Windows.Core\WinMasto.Core.csproj">
+      <Project>{ff1540ce-4a02-4971-adca-cecbe48cc4c5}</Project>
+      <Name>WinMasto.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

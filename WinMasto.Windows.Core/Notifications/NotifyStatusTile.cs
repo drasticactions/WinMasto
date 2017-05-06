@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Mastonet.Entities;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Newtonsoft.Json;
+using WinMasto.Core.Extensions;
 using Notification = Mastonet.Entities.Notification;
 
-namespace WinMasto.Windows.Core.Notifications
+namespace WinMasto.Core.Notifications
 {
     public class NotifyStatusTile
     {
@@ -22,9 +20,9 @@ namespace WinMasto.Windows.Core.Notifications
             {
                 Visual = new TileVisual()
                 {
-                    TileMedium = CreateMediumTitleBinding(status.Content, status.Account.AccountName),
-                    TileWide = CreateWideTitleBinding(status.Account.AvatarUrl, status.Content, status.Account.AccountName),
-                    TileLarge = CreateLargeTitleBinding(status.Account.AvatarUrl, status.Content, status.Account.AccountName)
+                    TileMedium = CreateMediumTitleBinding(HtmlRemoval.StripTagsCharArray(status.Content), status.Account.AccountName),
+                    TileWide = CreateWideTitleBinding(status.Account.AvatarUrl, HtmlRemoval.StripTagsCharArray(status.Content), status.Account.AccountName),
+                    TileLarge = CreateLargeTitleBinding(status.Account.AvatarUrl, HtmlRemoval.StripTagsCharArray(status.Content), status.Account.AccountName)
                 }
             };
             var tileXml = content.GetXml();
@@ -197,12 +195,12 @@ namespace WinMasto.Windows.Core.Notifications
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
         }
 
-        public static ToastContent CreatePostToastContent(string imageUrl, string caption, string subCaption, int statusId)
+        public static ToastContent CreatePostToastContent(string imageUrl, string caption, string subCaption, Status status)
         {
             var notification = new ToastNotificationArgs()
             {
                 Type = ToastType.Status,
-                StatusId = statusId
+                Status = status
             };
 
             return new ToastContent()
@@ -252,12 +250,12 @@ namespace WinMasto.Windows.Core.Notifications
             };
         }
 
-        public static ToastContent CreateFollowToastContent(string imageUrl, string caption, int accountId)
+        public static ToastContent CreateFollowToastContent(string imageUrl, string caption, Account account)
         {
             var notification = new ToastNotificationArgs()
             {
                 Type = ToastType.Account,
-                AccountId = accountId
+                Account = account
             };
 
             return new ToastContent()
@@ -312,24 +310,24 @@ namespace WinMasto.Windows.Core.Notifications
                     content = CreatePostToastContent
                         (notification.Account.AvatarUrl,
                         $"{notification.Account.AccountName} mentioned you", 
-                        notification.Status.Content, notification.Status.Id);
+                        HtmlRemoval.StripTagsCharArray(notification.Status.Content), notification.Status);
                 break;
                 case "reblog":
                     content = CreatePostToastContent
                     (notification.Account.AvatarUrl,
                         $"{notification.Account.AccountName} boosted your status",
-                        notification.Status.Content, notification.Status.Id);
+                        HtmlRemoval.StripTagsCharArray(notification.Status.Content), notification.Status);
                     break;
                 case "favourite":
                     content = CreatePostToastContent
                     (notification.Account.AvatarUrl,
                         $"{notification.Account.AccountName} favourited your status",
-                        notification.Status.Content, notification.Status.Id);
+                        HtmlRemoval.StripTagsCharArray(notification.Status.Content), notification.Status);
                     break;
                 case "follow":
                     content = CreateFollowToastContent
                     (notification.Account.AvatarUrl,
-                        $"{notification.Account.AccountName} followed you", notification.Account.Id);
+                        $"{notification.Account.AccountName} followed you", notification.Account);
                     break;
                 default:
                     throw new Exception("Unknown type");

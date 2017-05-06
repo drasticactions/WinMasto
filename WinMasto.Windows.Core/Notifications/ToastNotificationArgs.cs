@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mastonet.Entities;
+﻿using Mastonet.Entities;
 
-namespace WinMasto.Windows.Core.Notifications
+namespace WinMasto.Core.Notifications
 {
     public class ToastNotificationArgs
     {
         public ToastType Type { get; set; }
 
-        public int AccountId { get; set; }
+        public Account Account { get; set; }
 
-        public int StatusId { get; set; }
+        public Status Status { get; set; }
     }
 
     public enum ToastType

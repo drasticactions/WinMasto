@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 
-namespace WinMasto.BackgroundTasks
+namespace WinMasto.Tools.BackgroundTasks
 {
     public class BackgroundTaskUtils
     {

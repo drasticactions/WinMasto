@@ -51,7 +51,19 @@
                         <ToggleSwitch x:Name="UseDarkThemeToggleSwitch"  Header="Use Light Theme"
                                       IsOn="{Binding UseDarkThemeButton, Mode=TwoWay}"
                                       OffContent="Light Theme" OnContent="Dark Theme" />
-                        <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to fully see the changes.</TextBlock>
+                        <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to see the changes.</TextBlock>
+                        <ToggleSwitch x:Name="UseBackgroundTask" RelativePanel.Below="ThemeSwitchText"  Header="Enable Background Tasks"
+                                      IsOn="{Binding UseBackgroundTask, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BackgroundSwitchText" RelativePanel.Below="UseBackgroundTask" TextWrapping="Wrap">Enables background Tasks to be used (needed for live tile and toast notifications to work).</TextBlock>
+                        <ToggleSwitch x:Name="UseBookmarkBackground" RelativePanel.Below="BackgroundSwitchText" Header="Enable Live Tiles"
+                                      IsOn="{Binding UseBackgroundLiveTile, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkBackgroundSwitchText" RelativePanel.Below="UseBookmarkBackground" TextWrapping="Wrap">Enables the WinMasto live tile to show current toots</TextBlock>
+                        <ToggleSwitch x:Name="UseBookmarkNotification" RelativePanel.Below="BookmarkBackgroundSwitchText" Header="Enable Bookmark Notifications"
+                                      IsOn="{Binding UseBackgroundNotify, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkNotificationSwitchText" RelativePanel.Below="UseBookmarkNotification" TextWrapping="Wrap">Get toast notifications when events happen on Mastodon</TextBlock>
                     </RelativePanel>
                 </ScrollViewer>
             </PivotItem>

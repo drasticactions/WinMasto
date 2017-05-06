@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 using Mastonet.Entities;
 using Newtonsoft.Json;
 using Template10.Utils;
-using WinMasto.BackgroundTasks;
+using WinMasto.Tools.BackgroundTasks;
 using Application = Windows.UI.Xaml.Application;
 
 namespace WinMasto.Services
@@ -80,6 +80,24 @@ namespace WinMasto.Services
             {
                 _helper.Write(nameof(BackgroundEnable), value);
                 ChangeBackgroundStatus(value);
+            }
+        }
+
+        public bool BackgroundTile
+        {
+            get { return _helper.Read<bool>(nameof(BackgroundTile), false); }
+            set
+            {
+                _helper.Write(nameof(BackgroundTile), value);
+            }
+        }
+
+        public bool ToastNotifications
+        {
+            get { return _helper.Read<bool>(nameof(ToastNotifications), false); }
+            set
+            {
+                _helper.Write(nameof(ToastNotifications), value);
             }
         }
 

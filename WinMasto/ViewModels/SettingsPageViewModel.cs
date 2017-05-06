@@ -28,6 +28,24 @@ namespace WinMasto.ViewModels
             get { return _settings.AppTheme.Equals(ApplicationTheme.Dark); }
             set { _settings.AppTheme = value ? ApplicationTheme.Dark : ApplicationTheme.Light; base.RaisePropertyChanged(); }
         }
+
+        public bool UseBackgroundTask
+        {
+            get { return _settings.BackgroundEnable; }
+            set { _settings.BackgroundEnable = value; base.RaisePropertyChanged(); }
+        }
+
+        public bool UseBackgroundLiveTile
+        {
+            get { return _settings.BackgroundTile; }
+            set { _settings.BackgroundTile = value; base.RaisePropertyChanged(); }
+        }
+
+        public bool UseBackgroundNotify
+        {
+            get { return _settings.ToastNotifications; }
+            set { _settings.ToastNotifications = value; base.RaisePropertyChanged(); }
+        }
     }
 
     public class AboutPartViewModel : WinMastoViewModel

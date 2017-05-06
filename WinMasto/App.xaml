@@ -30,6 +30,7 @@
             <converters:ReplyToStatusConverter x:Key="ReplyToStatusConverter" />
             <converters:FollowYouConverter x:Key="FollowYouConverter" />
             <converters:SpoilerIconConverter x:Key="SpoilerIconConverter" />
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

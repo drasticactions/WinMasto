@@ -22,23 +22,59 @@ namespace WinMasto.ViewModels
                 IsLoading = false;
                 return;
             }
-            SelectedStatus = new ObservableCollection<Status> {status};
+            SelectedStatus = status;
+            Others = new ObservableCollection<Status>();
             Title = status.Account.AccountName;
+            Card = await Client.GetStatusCard(status.Id);
+            HasCard = Card.Title != null;
             var context = await Client.GetStatusContext(status.Id);
             foreach (var item in context.Ancestors.Reverse())
             {
-                SelectedStatus.Insert(0, item);
+                Others.Insert(0, item);
             }
             foreach (var item in context.Descendants)
             {
-                SelectedStatus.Add(item);
+                Others.Add(item);
             }
             IsLoading = false;
         }
 
-        private ObservableCollection<Status> _selectedStatus;
+        private bool _hasCard;
 
-        public ObservableCollection<Status> SelectedStatus
+        public bool HasCard
+        {
+            get { return _hasCard; }
+            set
+            {
+                Set(ref _hasCard, value);
+            }
+        }
+
+        private Card _card;
+
+        public Card Card
+        {
+            get { return _card; }
+            set
+            {
+                Set(ref _card, value);
+            }
+        }
+
+        private ObservableCollection<Status> _others;
+
+        public ObservableCollection<Status> Others
+        {
+            get { return _others; }
+            set
+            {
+                Set(ref _others, value);
+            }
+        }
+
+        private Status _selectedStatus;
+
+        public Status SelectedStatus
         {
             get { return _selectedStatus; }
             set

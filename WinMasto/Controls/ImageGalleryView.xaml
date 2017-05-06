@@ -21,7 +21,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <DataTemplate x:Name="ImageDataTemplate">
-            <controls:ImageEx Stretch="UniformToFill" Source="{Binding Url}">
+            <controls:ImageEx Stretch="Uniform" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Url}">
             </controls:ImageEx>
         </DataTemplate>
         <DataTemplate x:Name="MediaDataTemplate">
@@ -29,7 +29,7 @@
         </DataTemplate>
         <templateSelector:MediaAttachmentTemplateSelector x:Name="MediaAttachmentTemplateSelector" ImageStatusDataTemplate="{StaticResource ImageDataTemplate}" VideoStatusDataTemplate="{StaticResource MediaDataTemplate}"></templateSelector:MediaAttachmentTemplateSelector>
     </UserControl.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxHeight="600" MaxWidth="500">
+    <Grid Margin="25" x:Name="ImageControlGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="800" MaxHeight="700" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>

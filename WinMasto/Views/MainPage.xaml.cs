@@ -129,5 +129,6 @@ namespace WinMasto.Views
             if (status == null) return;
             await ViewModel.ShowStatusOption(status);
         }
+
     }
 }

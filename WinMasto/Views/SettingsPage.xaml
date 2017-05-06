@@ -55,6 +55,57 @@
                     </RelativePanel>
                 </ScrollViewer>
             </PivotItem>
+            <PivotItem Header="About">
+                <Grid DataContext="{Binding AboutPartViewModel}">
+                    <ScrollViewer ZoomMode="Disabled">
+                        <Grid>
+                            <Border HorizontalAlignment="Right" VerticalAlignment="Top"
+                                    BorderBrush="DimGray" BorderThickness="1"
+                                    IsHitTestVisible="False">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemAccentColor}" />
+                                </Border.Background>
+                                <Image Margin="12" Width="60" Height="60"  Source="{Binding Logo}" Stretch="UniformToFill" />
+                            </Border>
+                            <StackPanel>
+                                <TextBlock Margin="0,0,0,12"  Style="{StaticResource TitleTextBlockStyle}" Text="{Binding DisplayName}" />
+                                <TextBlock>
+                                    <Run>Version</Run>
+                                    <Run Text="{Binding Version}" />
+                                </TextBlock>
+                                <TextBlock Margin="0,30,0,0" Style="{StaticResource TitleTextBlockStyle}" Text="Main Developer:" />
+
+                                <RichTextBlock Margin="0,0,0,25" TextWrapping="Wrap">
+                                    <Paragraph>
+                                        Drastic Actions
+                                        <Hyperlink NavigateUri="https://github.com/drasticactions">(GitHub)</Hyperlink>
+                                    </Paragraph>
+                                </RichTextBlock>
+
+                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Libraries:" />
+
+                                <TextBlock Margin="0,0,0,25" TextWrapping="Wrap">
+                                    Mastonet
+                                    <LineBreak/>
+                                    EF.Core
+                                    <LineBreak/>
+                                    SQLite
+                                    <LineBreak/>
+                                    Json.NET
+                                    <LineBreak/>
+                                    Template 10
+                                    <LineBreak/>
+                                    Microsoft UWP Community Toolkit
+                                    <LineBreak/>
+                                    PrettyPrintNet
+                                    <LineBreak/>
+                                    QueryString.NET
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
         </Pivot>
         <!--  #endregion  -->
 

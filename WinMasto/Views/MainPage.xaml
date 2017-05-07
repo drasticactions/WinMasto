@@ -290,7 +290,7 @@
                                                      x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >
             </communitycontrols:PullToRefreshListView>
             <FlyoutBase.AttachedFlyout>
-                <Flyout FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
+                <Flyout AllowFocusOnInteraction="True" FlyoutPresenterStyle="{StaticResource ImageGalleryFlyoutPresenterStyle}" Placement="Full">
                     <localcontrols:ImageGalleryView x:Name="ImageGalleryView"></localcontrols:ImageGalleryView>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>

@@ -124,6 +124,7 @@
     <Compile Include="Tools\Converters\ThumbnailToImageConverter.cs" />
     <Compile Include="Tools\Extensions\InteractiveText.cs" />
     <Compile Include="Tools\Files\FileAccessCommands.cs" />
+    <Compile Include="Tools\MessageDialogMaker.cs" />
     <Compile Include="Tools\NotificationScrollingCollection.cs" />
     <Compile Include="Tools\TemplateSelector\MediaAttachmentTemplateSelector.cs" />
     <Compile Include="Tools\TemplateSelector\NotificationTemplateSelector.cs" />

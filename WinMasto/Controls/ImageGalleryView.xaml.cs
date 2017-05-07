@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
+using WinMasto.Tools;
 using WinMasto.Tools.Files;
 using WinMasto.ViewModels;
 
@@ -28,13 +29,69 @@ namespace WinMasto.Controls
             this.InitializeComponent();
         }
 
+        private async void ShowAccount_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as MenuFlyoutItem;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            if (status == null) return;
+            await ViewModel.NavigateToAccountPage(status.Account);
+        }
+
+        private async void Favorite_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.FavoriteOption(status);
+        }
+
+        private async void ReShare_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.ReShareOption(status);
+        }
+
+        private async void Reply_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.ReplyOption(status);
+        }
+
+
+        private async void Mention_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.MentionOption(status);
+        }
+
+        private async void Mute_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.MuteOption(status);
+        }
+
+        private async void Block_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as MenuFlyoutItem;
+            var status = menuFlyoutItem?.CommandParameter as Status;
+            await ViewModel.BlockOption(status);
+        }
+
         public ImageGalleryViewModel ViewModel => this.DataContext as ImageGalleryViewModel;
 
         private async void Save_OnClick(object sender, RoutedEventArgs e)
         {
+            var error = "";
             try
             {
-                var imageSource = sender as MenuFlyoutItem;
+                var imageSource = sender as Button;
                 var attachment = imageSource?.CommandParameter as Attachment;
                 if (attachment == null)
                     return;
@@ -46,7 +103,16 @@ namespace WinMasto.Controls
             }
             catch (Exception ex)
             {
-                
+                error = ex.Message;
+            }
+
+            if (string.IsNullOrEmpty(error))
+            {
+                await MessageDialogMaker.SendMessageDialogAsync("Saved the picture to your camera roll!", true);
+            }
+            else
+            {
+                await MessageDialogMaker.SendMessageDialogAsync(error, false);
             }
         }
     }

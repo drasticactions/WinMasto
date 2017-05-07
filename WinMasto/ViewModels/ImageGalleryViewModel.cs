@@ -7,7 +7,7 @@ using Mastonet.Entities;
 
 namespace WinMasto.ViewModels
 {
-    public class ImageGalleryViewModel : WinMastoViewModel
+    public class ImageGalleryViewModel : StatusBaseViewModel
     {
         private Status _status;
         public Status Status { get { return _status; } set { Set(ref _status, value); } }

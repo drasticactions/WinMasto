@@ -21,8 +21,11 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <DataTemplate x:Name="ImageDataTemplate">
-            <controls:ImageEx Stretch="Uniform" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Url}">
-            </controls:ImageEx>
+            <Grid>
+                <controls:ImageEx Stretch="Uniform" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Url}">
+                </controls:ImageEx>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Save_OnClick" CommandParameter="{Binding}" Content="Save Image"></Button>
+            </Grid>
         </DataTemplate>
         <DataTemplate x:Name="MediaDataTemplate">
             <MediaElement Source="{Binding Url}"></MediaElement>
@@ -35,7 +38,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <FlipView ItemTemplateSelector="{StaticResource MediaAttachmentTemplateSelector}" ItemsSource="{Binding Status.MediaAttachments}">
+            <FlipView AllowFocusOnInteraction="True" ItemTemplateSelector="{StaticResource MediaAttachmentTemplateSelector}" ItemsSource="{Binding Status.MediaAttachments}">
             </FlipView>
         </Grid>
         <Grid Grid.Row="1">
@@ -66,16 +69,16 @@
                         <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Status.Content, Converter={StaticResource StripHtmlConverter}}"/>
                     </Grid>
                     <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="3">
-                        <Button CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
+                        <Button Click="Reply_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
                             <uwp:FontAwesome Icon="Reply" />
                         </Button>
-                        <Button CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                        <Button Click="ReShare_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="ReShare"/>
                                 <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.ReblogCount}"></TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                        <Button Click="Favorite_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                             <StackPanel Orientation="Horizontal">
                                 <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
                                 <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.FavouritesCount}"></TextBlock>
@@ -85,10 +88,11 @@
                             <SymbolIcon Symbol="More"/>
                             <Button.Flyout>
                                 <MenuFlyout>
-                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Mention"/>
-                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Mute"/>
-                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Block"/>
-                                    <MenuFlyoutItem CommandParameter="{Binding Status}" Text="Report"/>
+                                    <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
+                                    <MenuFlyoutSeparator/>
+                                    <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
+                                    <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
+                                    <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>

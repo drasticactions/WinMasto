@@ -1,4 +1,4 @@
-![](WinMasto/Assets/SmallTile.scale-400.png)
+![](http://i.imgur.com/WmVs4uX.png)
 
 ## WinMasto
 

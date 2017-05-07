@@ -31,6 +31,9 @@
             <converters:FollowYouConverter x:Key="FollowYouConverter" />
             <converters:SpoilerIconConverter x:Key="SpoilerIconConverter" />
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <converters:IsFollowingConverter x:Key="IsFollowingConverter" />
+            <converters:IsMutedConverter x:Key="IsMutedConverter" />
+            <converters:IsBlockingConverter x:Key="IsBlockingConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

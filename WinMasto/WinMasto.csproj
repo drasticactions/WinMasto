@@ -106,6 +106,7 @@
     <Compile Include="Models\PhotoFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Tools\Converters\AccountConverters.cs" />
     <Compile Include="Tools\Converters\AddAtSignConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />

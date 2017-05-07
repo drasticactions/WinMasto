@@ -55,7 +55,7 @@
                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".20"></SolidColorBrush>
             </controls:HamburgerMenu.NavButtonHoverBackground>
             <controls:HamburgerMenu.PrimaryButtons>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageParameter="home" PageType="local:MainPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageParameter="home" PageType="local:MainPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48"
                                     Height="48"
@@ -65,7 +65,7 @@
                                    Text="Home" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageParameter="local" PageType="local:MainPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageParameter="local" PageType="local:MainPage">
                     <StackPanel Orientation="Horizontal">
                         <uwp:FontAwesome
                             Width="48"
@@ -76,7 +76,7 @@
                                    Text="Local" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageParameter="public" PageType="local:MainPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageParameter="public" PageType="local:MainPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48"
                                     Height="48"
@@ -86,7 +86,7 @@
                                    Text="Federated" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageType="local:NotificationPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="local:NotificationPage">
                     <StackPanel Orientation="Horizontal">
                         <uwp:FontAwesome
                             Width="48"
@@ -97,7 +97,7 @@
                                    Text="Notifications" />
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" PageType="local:AccountPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}"  PageType="local:AccountPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48"
                                     Height="48"
@@ -109,7 +109,7 @@
                 </controls:HamburgerButtonInfo>
             </controls:HamburgerMenu.PrimaryButtons>
             <controls:HamburgerMenu.SecondaryButtons>
-                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" ClearHistory="True" x:Name="StatusButton" PageType="local:NewStatusPage">
+                <controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" x:Name="StatusButton" PageType="local:NewStatusPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48" Height="48" Symbol="Edit" />
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="New Status" />
@@ -123,7 +123,7 @@
                     </StackPanel>
                 </controls:HamburgerButtonInfo>
                 <!-- settings button -->
-                <controls:HamburgerButtonInfo ClearHistory="True" PageType="local:SettingsPage">
+                <controls:HamburgerButtonInfo PageType="local:SettingsPage">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Width="48" Height="48" Symbol="Setting" />
                         <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Settings" />

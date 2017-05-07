@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Mastonet.Entities;
 using Newtonsoft.Json;
+using Template10.Mvvm;
 using WinMasto.Services;
 using WinMasto.Tools;
 
@@ -30,7 +31,20 @@ namespace WinMasto.ViewModels
                         if (Account == null || testAccount.Id != Account.Id)
                         {
                             Account = await Client.GetAccount(testAccount.Id);
+                            try
+                            {
+                                var relationships = await Client.GetAccountRelationships(testAccount.Id);
+                                if (relationships.Any())
+                                {
+                                    Relationship = relationships.FirstOrDefault();
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Relationship = new Relationship();
+                            }
                             getNewStatus = true;
+                            IsCurrentUser = false;
                         }
                     }
                     else
@@ -41,6 +55,7 @@ namespace WinMasto.ViewModels
                             Account = await Client.GetAccount(serviceAccountTest.Id);
                             SettingsService.Instance.UserAccount = Account;
                             getNewStatus = true;
+                            IsCurrentUser = true;
                         }
                     }
                 }
@@ -59,6 +74,73 @@ namespace WinMasto.ViewModels
             IsLoading = false;
         }
 
+        public async Task SetFollowField()
+        {
+            try
+            {
+                if (Relationship.Following)
+                {
+                    Relationship = await Client.Unfollow(Account.Id);
+                }
+                else
+                {
+                    Relationship = await Client.Follow(Account.Id);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: Add error handling
+            }
+        }
+
+        public async Task SetBlockField()
+        {
+            try
+            {
+                if (Relationship.Blocking)
+                {
+                    Relationship = await Client.Unblock(Account.Id);
+                }
+                else
+                {
+                    Relationship = await Client.Block(Account.Id);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: Add error handling
+            }
+        }
+
+        public async Task SetMuteField()
+        {
+            try
+            {
+                if (Relationship.Muting)
+                {
+                    Relationship = await Client.Unmute(Account.Id);
+                }
+                else
+                {
+                    Relationship = await Client.Mute(Account.Id);
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: Add error handling
+            }
+        }
+
+        private Relationship _relationship;
+
+        public Relationship Relationship
+        {
+            get { return _relationship; }
+            set
+            {
+                Set(ref _relationship, value);
+            }
+        }
 
         private Account _account;
 
@@ -68,6 +150,17 @@ namespace WinMasto.ViewModels
             set
             {
                 Set(ref _account, value);
+            }
+        }
+
+        private bool _isCurrentUser;
+
+        public bool IsCurrentUser
+        {
+            get { return _isCurrentUser; }
+            set
+            {
+                Set(ref _isCurrentUser, value);
             }
         }
     }

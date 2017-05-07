@@ -162,7 +162,7 @@
           SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}"
           SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
           SelectedPointerOverBackground="Transparent"
-          PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+          PressedBackground="Transparent"
           SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
           DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
           DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"

@@ -334,6 +334,22 @@
                             <Grid>
                                 <TextBlock TextAlignment="Center" TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Account.Note, Converter={StaticResource StripHtmlConverter}}"></TextBlock>
                             </Grid>
+                            <Grid Visibility="{Binding IsCurrentUser, Converter={StaticResource BooleanToVisibilityInverter}}" Padding="0,5,0,0" Grid.Row="1">
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Button Margin="0,0,5,0" Click="{x:Bind ViewModel.SetFollowField}" Style="{StaticResource StatusButtonStyle}">
+                                        <uwp:FontAwesome
+                                            Icon="{Binding Relationship, Converter={StaticResource IsFollowingConverter}}" />
+                                    </Button>
+                                    <Button Margin="0,0,5,0" Click="{x:Bind ViewModel.SetBlockField}" Style="{StaticResource StatusButtonStyle}">
+                                        <uwp:FontAwesome
+                                            Icon="{Binding Relationship, Converter={StaticResource IsBlockingConverter}}" />
+                                    </Button>
+                                    <Button Margin="0,0,5,0" Click="{x:Bind ViewModel.SetMuteField}" Style="{StaticResource StatusButtonStyle}">
+                                        <uwp:FontAwesome
+                                            Icon="{Binding Relationship, Converter={StaticResource IsMutedConverter}}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </controls:PullToRefreshListView.Header>

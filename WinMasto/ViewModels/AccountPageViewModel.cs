@@ -17,6 +17,7 @@ namespace WinMasto.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
             IsLoading = true;
+            Title = "";
             await LoginUser();
             var getNewStatus = false;
             // TODO: The navigation cache will make it so that it will always get a new page.

@@ -124,6 +124,11 @@ namespace WinMasto.Views
         private async void StatusListView_OnItemClick(object sender, ItemClickEventArgs e)
         {
             var notification = e.ClickedItem as Notification;
+            if (notification == null) return;
+            if (notification.Type == "follow")
+            {
+                await ViewModel.NavigateToAccountPage(notification.Account);
+            }
             if (notification.Status == null) return;
             await ViewModel.ShowStatusOption(notification.Status);
         }

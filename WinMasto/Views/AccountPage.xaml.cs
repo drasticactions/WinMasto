@@ -28,7 +28,6 @@ namespace WinMasto.Views
         public AccountPage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         public AccountPageViewModel ViewModel => this.DataContext as AccountPageViewModel;
@@ -126,6 +125,13 @@ namespace WinMasto.Views
         {
             if (ViewModel != null && ViewModel.Statuses.Any())
                 StatusListView.ScrollIntoView(ViewModel.Statuses.First());
+        }
+
+        private async void StatusListView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var status = e.ClickedItem as Status;
+            if (status == null) return;
+            await ViewModel.ShowStatusOption(status);
         }
     }
 }

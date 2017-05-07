@@ -14,7 +14,7 @@ namespace WinMasto.Tools.Converters
         {
             var notification = value as Notification;
             if (notification == null) return "";
-            return $"{notification.Account.UserName} - @{notification.Account.AccountName} followed you";
+            return $"@{notification.Account.AccountName} followed you";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

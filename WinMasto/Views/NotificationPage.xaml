@@ -172,7 +172,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Padding="10,0,5,0" Text="{Binding Account.UserName}" FontWeight="Bold" />
-                        <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
+                        <TextBlock  Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -296,7 +296,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Converter={StaticResource FollowYouConverter}}" />
+                        <TextBlock TextWrapping="Wrap" Grid.Column="0" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Converter={StaticResource FollowYouConverter}}" />
                     </Grid>
                 </Grid>
                 <Grid Padding="60,0,0,15" Grid.Row="1">

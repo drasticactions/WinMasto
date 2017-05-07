@@ -274,7 +274,7 @@
         <Grid.Background>
             <brushes:HostBlurBrush BlurColor="{ThemeResource StatusBackground}" BlurAmount="20"/>
         </Grid.Background>
-        <controls1:PageHeader BackButtonVisibility="Collapsed"   Content="{Binding Title}" Frame="{x:Bind Frame}">
+        <controls1:PageHeader BackButtonVisibility="Collapsed" Tapped="ScrollToTop"  Content="{Binding Title}" Frame="{x:Bind Frame}">
             <controls1:PageHeader.Background>
                 <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
             </controls1:PageHeader.Background>

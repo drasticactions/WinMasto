@@ -127,5 +127,11 @@ namespace WinMasto.Views
             if (notification.Status == null) return;
             await ViewModel.ShowStatusOption(notification.Status);
         }
+
+        private void ScrollToTop(object sender, TappedRoutedEventArgs e)
+        {
+            if (ViewModel != null && ViewModel.Notifications.Any())
+                StatusListView.ScrollIntoView(ViewModel.Notifications.First());
+        }
     }
 }

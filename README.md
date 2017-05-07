@@ -1,4 +1,6 @@
-![](WinMasto/Assets/SplashScreen.scale-100.png)
+![](WinMasto/Assets/SmallTile.scale-400.png)
+
+## WinMasto
 
 WinMasto is a UWP client for Mastodon, a GNU social-compatible federated social network. You can learn more about Mastodon [here](https://github.com/tootsuite/mastodon). The goal of this project is to create a simple, elegant, Mastodon client that doesn't try to stuff as many power user features in as possible.
 

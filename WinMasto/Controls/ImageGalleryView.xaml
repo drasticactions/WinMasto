@@ -78,7 +78,7 @@
                                 <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.ReblogCount}"></TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Click="Favorite_OnClick" CommandParameter="{Binding}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                        <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                             <StackPanel Orientation="Horizontal">
                                 <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
                                 <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.FavouritesCount}"></TextBlock>
@@ -90,9 +90,9 @@
                                 <MenuFlyout>
                                     <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
                                     <MenuFlyoutSeparator/>
-                                    <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding}" Text="Mention"/>
-                                    <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding}" Text="Mute"/>
-                                    <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding}" Text="Block"/>
+                                    <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding Status}" Text="Mention"/>
+                                    <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding Status}" Text="Mute"/>
+                                    <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding Status}" Text="Block"/>
                                 </MenuFlyout>
                             </Button.Flyout>
                         </Button>

@@ -85,7 +85,7 @@ namespace WinMasto.Views
             await ViewModel.ReplyOption(status);
         }
 
-        private void ImageItem_OnClick(object sender, ItemClickEventArgs e)
+        private async void ImageItem_OnClick(object sender, ItemClickEventArgs e)
         {
             var attachment = e.ClickedItem as Attachment;
             if (attachment == null) return;

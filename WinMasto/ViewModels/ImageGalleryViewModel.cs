@@ -12,8 +12,9 @@ namespace WinMasto.ViewModels
         private Status _status;
         public Status Status { get { return _status; } set { Set(ref _status, value); } }
 
-        public void SetStatus(Status status, Attachment attachment)
+        public async void SetStatus(Status status, Attachment attachment)
         {
+            await LoginUser();
             Status = status;
         }
     }

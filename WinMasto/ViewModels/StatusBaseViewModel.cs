@@ -23,36 +23,40 @@ namespace WinMasto.ViewModels
 
         public async Task ReplyOption(Status status)
         {
-            await NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsReply = true, Status = status});
+            await Template10.Common.BootStrapper.Current.NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsReply = true, Status = status});
         }
 
         public async Task MentionOption(Status status)
         {
-            await NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsMention = true, Status = status });
+            await Template10.Common.BootStrapper.Current.NavigationService.NavigateAsync(typeof(NewStatusPage), new NewStatusParameter { IsMention = true, Status = status });
         }
 
-        public async Task BlockOption(Status status)
+        public async Task<Relationship> BlockOption(Status status)
         {
             try
             {
-                var result = await Client.Block(status.Account.Id);
+                return await Client.Block(status.Account.Id);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
+
+            return new Relationship();
         }
 
-        public async Task MuteOption(Status status)
+        public async Task<Relationship> MuteOption(Status status)
         {
             try
             {
-                var result = await Client.Mute(status.Account.Id);
+                return await Client.Mute(status.Account.Id);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
+
+            return new Relationship();
         }
 
         public async Task ReportOption(Status status)
@@ -62,7 +66,7 @@ namespace WinMasto.ViewModels
 
         public async Task ShowStatusOption(Status status)
         {
-            await NavigationService.NavigateAsync(typeof(StatusPage), status);
+            await Template10.Common.BootStrapper.Current.NavigationService.NavigateAsync(typeof(StatusPage), status);
         }
 
         public async Task PullToRefresh()
@@ -77,7 +81,7 @@ namespace WinMasto.ViewModels
 
         public async Task NavigateToAccountPage(Account account)
         {
-            await NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(account));
+            await Template10.Common.BootStrapper.Current.NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(account));
         }
 
         public async Task ShowNSFWPost(Status status)
@@ -85,8 +89,11 @@ namespace WinMasto.ViewModels
             Status newStatus = status;
             newStatus.Sensitive = false;
             newStatus.SpoilerText = string.Empty;
-            var index = Statuses.IndexOf(status);
-            Statuses[index] = newStatus;
+            if (Statuses != null)
+            {
+                var index = Statuses.IndexOf(status);
+                Statuses[index] = newStatus;
+            }
         }
 
         public async Task ShowNSFWPostNotifications(Notification notification)
@@ -95,27 +102,23 @@ namespace WinMasto.ViewModels
             var index = Notifications.IndexOf(notification);
             newStatus.Sensitive = false;
             newStatus.SpoilerText = string.Empty;
-            notification.Status = newStatus;
-            Notifications[index] = notification;
+            if (Notifications != null)
+            {
+                notification.Status = newStatus;
+                Notifications[index] = notification;
+            }
         }
 
-        public async Task ReShareOption(Status status)
+        public async Task<Status> ReShareOption(Status status)
         {
             // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.
             // It would make more sense to replace the status object in the list with the one it gets from the API
             // But it's not updating, because OnPropertyChanged is not in Status...
             // Reblog returns "reblogged" status, not the original status updated.
-            Status newStatus = status;
-            if (status.Reblogged == null)
+            try
             {
-                await Client.Reblog(status.Id);
-                newStatus.Reblogged = true;
-                newStatus.ReblogCount = newStatus.ReblogCount + 1;
-            }
-            else
-            {
-                var reblogged = !status.Reblogged.Value;
-                if (reblogged)
+                Status newStatus = status;
+                if (status.Reblogged == null)
                 {
                     await Client.Reblog(status.Id);
                     newStatus.Reblogged = true;
@@ -123,50 +126,81 @@ namespace WinMasto.ViewModels
                 }
                 else
                 {
-                    await Client.Unreblog(status.Id);
-                    newStatus.Reblogged = false;
-                    newStatus.ReblogCount = newStatus.ReblogCount - 1;
+                    var reblogged = !status.Reblogged.Value;
+                    if (reblogged)
+                    {
+                        await Client.Reblog(status.Id);
+                        newStatus.Reblogged = true;
+                        newStatus.ReblogCount = newStatus.ReblogCount + 1;
+                    }
+                    else
+                    {
+                        await Client.Unreblog(status.Id);
+                        newStatus.Reblogged = false;
+                        newStatus.ReblogCount = newStatus.ReblogCount - 1;
+                    }
                 }
+                if (Statuses != null)
+                {
+                    var index = Statuses.IndexOf(status);
+                    Statuses[index] = newStatus;
+                }
+                status = newStatus;
             }
-            var index = Statuses.IndexOf(status);
-            Statuses[index] = newStatus;
+            catch (Exception e)
+            {
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
+            }
+            return status;
         }
 
-        public async Task FavoriteOption(Status status)
+        public async Task<Status> FavoriteOption(Status status)
         {
             // TODO: This "works", but it could be more simple. The API layer needs to be tweeked.
             // It would make more sense to replace the status object in the list with the one it gets from the API
             // But it's not updating, because OnPropertyChanged is not in Status...
-            Status newStatus;
-            if (status.Favourited == null)
+            try
             {
-                newStatus = await Client.Favourite(status.Id);
-            }
-            else
-            {
-                var favorite = !status.Favourited.Value;
-                if (favorite)
+                Status newStatus;
+                if (status.Favourited == null)
                 {
                     newStatus = await Client.Favourite(status.Id);
                 }
                 else
                 {
+                    var favorite = !status.Favourited.Value;
+                    if (favorite)
+                    {
+                        newStatus = await Client.Favourite(status.Id);
+                    }
+                    else
+                    {
 
-                    // API Bug: Unfavorite returns a status that still says it's favorited, even though it's not.
-                    // Not sure if it's mastodon, or the instance I'm on. So for now, we'll force it to say it's
-                    // not there.
-                    newStatus = await Client.Unfavourite(status.Id);
-                    newStatus.Favourited = false;
-                    newStatus.FavouritesCount = newStatus.FavouritesCount - 1;
+                        // API Bug: Unfavorite returns a status that still says it's favorited, even though it's not.
+                        // Not sure if it's mastodon, or the instance I'm on. So for now, we'll force it to say it's
+                        // not there.
+                        newStatus = await Client.Unfavourite(status.Id);
+                        newStatus.Favourited = false;
+                        newStatus.FavouritesCount = newStatus.FavouritesCount - 1;
+                    }
                 }
+                if (Statuses != null)
+                {
+                    var index = Statuses.IndexOf(status);
+                    Statuses[index] = newStatus;
+                }
+                status = newStatus;
             }
-            var index = Statuses.IndexOf(status);
-            Statuses[index] = newStatus;
+            catch (Exception e)
+            {
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
+            }
+            return status;
         }
 
         public async Task NavigateToLoginView()
         {
-            await NavigationService.NavigateAsync(typeof(LoginPage));
+            await Template10.Common.BootStrapper.Current.NavigationService.NavigateAsync(typeof(LoginPage));
         }
 
         private string _title = string.Empty;

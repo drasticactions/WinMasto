@@ -280,12 +280,6 @@
             </controls1:PageHeader.Background>
         </controls1:PageHeader>
         <ProgressBar IsIndeterminate="True" Visibility="{x:Bind ViewModel.Statuses.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1"/>
-        <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.Background>
-                <SolidColorBrush Opacity=".9" Color="{ThemeResource LoadingBackground}"></SolidColorBrush>
-            </Grid.Background>
-            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
-        </Grid>
         <Grid x:Name="StatusGrid" Grid.Row="2" VerticalAlignment="Stretch">
             <controls:PullToRefreshListView OverscrollLimit="0.27" PullThreshold="79" IsPullToRefreshWithMouseEnabled="True" IsItemClickEnabled="True" ItemClick="StatusListView_OnItemClick"
                                                      RefreshRequested="ListView_RefreshCommand" x:Name="StatusListView" SelectionMode="None" ItemsSource="{Binding Statuses}" ItemTemplateSelector="{StaticResource StatusTemplateSelector}" ItemContainerStyle="{StaticResource StatusListViewItemStyle}" >

@@ -30,6 +30,7 @@ namespace WinMasto.Views
         public NotificationPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         private async void Mention_OnClick(object sender, RoutedEventArgs e)

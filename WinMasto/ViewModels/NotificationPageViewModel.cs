@@ -19,7 +19,7 @@ namespace WinMasto.ViewModels
             if (IsLoggedIn)
             {
 
-                if (mode == NavigationMode.New || (mode == NavigationMode.Back))
+                if (mode == NavigationMode.New || Notifications == null)
                 {
                     Notifications = new NotificationScrollingCollection(Client);
                 }

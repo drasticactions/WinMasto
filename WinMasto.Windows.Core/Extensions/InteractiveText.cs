@@ -30,4 +30,13 @@
             return new string(array, 0, arrayIndex);
         }
     }
+
+    public static class StringExtensions
+    {
+        public static string Truncate(this string s, int length)
+        {
+            if (s.Length > length) return s.Substring(0, length);
+            return s;
+        }
+    }
 }

@@ -76,7 +76,7 @@ namespace WinMasto.BackgroundNotify
         {
             var notifications = await _client.GetNotifications();
             var newNotifications = notifications.Where(node => node.CreatedAt > lastRefreshTime);
-            foreach (var notification in notifications)
+            foreach (var notification in newNotifications)
             {
                 NotifyStatusTile.CreateToastNotification(notification);
             }
@@ -86,7 +86,7 @@ namespace WinMasto.BackgroundNotify
         {
             var notifications = await _client.GetNotifications();
             var newNotifications = notifications.Where(node => node.CreatedAt > lastRefreshTime);
-            foreach (var notification in notifications)
+            foreach (var notification in newNotifications)
             {
                 NotifyStatusTile.CreateNotificationLiveTile(notification);
             }

@@ -139,7 +139,7 @@ namespace WinMasto
             switch (arguments.Type)
             {
                 case ToastType.Account:
-                    await NavigationService.NavigateAsync(typeof(Views.AccountPage), arguments.Account);
+                    await NavigationService.NavigateAsync(typeof(Views.AccountPage), JsonConvert.SerializeObject(arguments.Account));
                     break;
                 case ToastType.Status:
                     await NavigationService.NavigateAsync(typeof(Views.StatusPage), arguments.Status);

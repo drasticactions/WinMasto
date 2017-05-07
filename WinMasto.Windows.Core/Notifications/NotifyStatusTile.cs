@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Windows.Data.Xml.Dom;
@@ -38,7 +39,7 @@ namespace WinMasto.Core.Notifications
                 {
                     new AdaptiveText()
                     {
-                        Text = caption,
+                        Text = caption.Truncate(100),
                         HintStyle = AdaptiveTextStyle.Caption
                     },
                     new AdaptiveText()
@@ -84,7 +85,7 @@ namespace WinMasto.Core.Notifications
                                 {
                                     new AdaptiveText()
                                     {
-                                        Text = caption,
+                                        Text = caption.Truncate(100),
                                         HintStyle = AdaptiveTextStyle.Caption
                                     },
                                     new AdaptiveText()
@@ -135,7 +136,7 @@ namespace WinMasto.Core.Notifications
                                 {
                                     new AdaptiveText()
                                     {
-                                        Text = caption,
+                                        Text = caption.Truncate(100),
                                         HintStyle = AdaptiveTextStyle.Caption
                                     },
                                     new AdaptiveText()
@@ -166,19 +167,20 @@ namespace WinMasto.Core.Notifications
             switch (notification.Type)
             {
                 case "mention":
-                    notificationString = $"{notification.Account.AccountName} mentioned you";
-                    notificationSubstring = notification.Status.Content;
+                    notificationString = $"↩️ {notification.Account.AccountName}";
+                    notificationSubstring = HtmlRemoval.StripTagsCharArray(notification.Status.Content);
                     break;
                 case "reblog":
-                    notificationString = $"{notification.Account.AccountName} boosted your status";
-                    notificationSubstring = notification.Status.Content;
+                    notificationString = $"🔁 {notification.Account.AccountName}";
+                    notificationSubstring = HtmlRemoval.StripTagsCharArray(notification.Status.Content);
                     break;
                 case "favourite":
-                    notificationString = $"{notification.Account.AccountName} favourited your status";
-                    notificationSubstring = notification.Status.Content;
+                    notificationString = $"⭐ {notification.Account.AccountName} favourited your status";
+                    notificationSubstring = HtmlRemoval.StripTagsCharArray(notification.Status.Content);
                     break;
                 case "follow":
-                    notificationString = $"{notification.Account.AccountName} followed you";
+                    notificationString = $"New Follower:";
+                    notificationSubstring = $"{notification.Account.AccountName}";
                     break;
             }
             var content = new TileContent()
@@ -197,6 +199,7 @@ namespace WinMasto.Core.Notifications
 
         public static ToastContent CreatePostToastContent(string imageUrl, string caption, string subCaption, Status status)
         {
+            status.MediaAttachments = new List<Attachment>();
             var notification = new ToastNotificationArgs()
             {
                 Type = ToastType.Status,
@@ -245,7 +248,7 @@ namespace WinMasto.Core.Notifications
                 },
                 Audio = new ToastAudio()
                 {
-                    Src = new Uri("ms-winsoundevent:Notification.Reminder")
+                    Src = new Uri("ms-winsoundevent:Notification.Default")
                 }
             };
         }
@@ -296,7 +299,7 @@ namespace WinMasto.Core.Notifications
                 },
                 Audio = new ToastAudio()
                 {
-                    Src = new Uri("ms-winsoundevent:Notification.Reminder")
+                    Src = new Uri("ms-winsoundevent:Notification.Default")
                 }
             };
         }

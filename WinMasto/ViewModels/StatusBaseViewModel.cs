@@ -145,6 +145,17 @@ namespace WinMasto.ViewModels
                     var index = Statuses.IndexOf(status);
                     Statuses[index] = newStatus;
                 }
+                var notifications = Notifications?.Where(node => node.Status == status).ToList();
+                if (notifications != null)
+                {
+                    for (var i = 0; i < notifications.Count(); i++)
+                    {
+                        var index = Notifications.IndexOf(notifications[i]);
+                        var newNotification = notifications[i];
+                        newNotification.Status = newStatus;
+                        Notifications[index] = newNotification;
+                    }
+                }
                 status = newStatus;
             }
             catch (Exception e)
@@ -188,6 +199,17 @@ namespace WinMasto.ViewModels
                 {
                     var index = Statuses.IndexOf(status);
                     Statuses[index] = newStatus;
+                }
+                var notifications = Notifications?.Where(node => node.Status == status).ToList();
+                if (notifications != null)
+                {
+                    for (var i = 0; i < notifications.Count(); i++)
+                    {
+                        var index = Notifications.IndexOf(notifications[i]);
+                        var newNotification = notifications[i];
+                        newNotification.Status = newStatus;
+                        Notifications[index] = newNotification;
+                    }
                 }
                 status = newStatus;
             }

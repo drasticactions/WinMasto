@@ -2,6 +2,9 @@
 
 WinMasto is a UWP client for Mastodon, a GNU social-compatible federated social network. You can learn more about Mastodon [here](https://github.com/tootsuite/mastodon). The goal of this project is to create a simple, elegant, Mastodon client that doesn't try to stuff as many power user features in as possible.
 
+<img src="http://i.imgur.com/LxxiWm3.png" width="400"> <img src="http://i.imgur.com/2y85gVY.png" width="400">
+
+
 It is currently not available in the store. However, debug builds from VSTS can be found on the Releases tab. You should be able to sideload these.
 
 ## Features

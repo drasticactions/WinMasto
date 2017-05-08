@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using Mastonet;
 using Mastonet.Entities;
 using WinMasto.Models;
+using WinMasto.Tools;
 using WinMasto.Views;
 
 namespace WinMasto.ViewModels
@@ -119,7 +120,6 @@ namespace WinMasto.ViewModels
 
         public async Task SendStatus()
         {
-            // TODO: This is for testing the postStatus function. Make this more generic.
             IsLoading = true;
             if (string.IsNullOrEmpty(Status) || Status.Length > 500) return;
             IEnumerable<int> mediaIds = null;
@@ -136,7 +136,7 @@ namespace WinMasto.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
             IsLoading = false;
         }

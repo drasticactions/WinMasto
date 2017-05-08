@@ -9,16 +9,23 @@ using Mastonet;
 using Mastonet.Entities;
 using Microsoft.QueryStringDotNET;
 using WinMasto.Services;
+using WinMasto.Tools;
 
 namespace WinMasto.ViewModels
 {
     public class LoginPageViewModel : WinMastoViewModel
     {
+        public LoginPageViewModel()
+        {
+            _helper = new Template10.Services.SettingsService.SettingsHelper();
+        }
         #region Properties
         string _server = string.Empty;
         public string Server { get { return _server; } set { Set(ref _server, value); } }
 
         private string _serverRedirect = "https://{0}/oauth/authorize/";
+
+        readonly Template10.Services.SettingsService.ISettingsHelper _helper;
 
         private SettingsService SettingsService = SettingsService.Instance;
         #endregion
@@ -94,8 +101,7 @@ namespace WinMasto.ViewModels
             }
             catch (Exception e)
             {
-                // TODO: Add error message;
-                Console.WriteLine(e);
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
 
             //var authUri = $"https://{Server}/oauth/authorize?response_type=code&client_id="
@@ -113,7 +119,11 @@ namespace WinMasto.ViewModels
 
         public async Task LogoutUser()
         {
-            
+            IsLoggedIn = false;
+            Views.Shell.Instance.ViewModel.IsLoggedIn = false;
+            _helper.Write<string>("AppRegistrationService", "");
+            _helper.Write<string>("ServerInstance", "");
+            _helper.Write<string>("UserAuth", "");
         }
 
         #endregion

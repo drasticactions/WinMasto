@@ -42,6 +42,7 @@ namespace WinMasto.ViewModels
                             }
                             catch (Exception e)
                             {
+                                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
                                 Relationship = new Relationship();
                             }
                             getNewStatus = true;
@@ -63,6 +64,7 @@ namespace WinMasto.ViewModels
                 catch (Exception e)
                 {
                     // TODO: Show an error if we can't show the user account.
+                    await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
                     Account = SettingsService.Instance.UserAccount;
                 }
                 Title = Account.UserName;
@@ -90,7 +92,7 @@ namespace WinMasto.ViewModels
             }
             catch (Exception e)
             {
-                // TODO: Add error handling
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
         }
 
@@ -109,7 +111,7 @@ namespace WinMasto.ViewModels
             }
             catch (Exception e)
             {
-                // TODO: Add error handling
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
         }
 
@@ -128,7 +130,7 @@ namespace WinMasto.ViewModels
             }
             catch (Exception e)
             {
-                // TODO: Add error handling
+                await MessageDialogMaker.SendMessageDialogAsync(e.Message, false);
             }
         }
 

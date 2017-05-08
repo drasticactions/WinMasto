@@ -85,6 +85,14 @@
                                     <Run>Version</Run>
                                     <Run Text="{Binding Version}" />
                                 </TextBlock>
+
+                                <RichTextBlock Margin="0,0,0,25" TextWrapping="Wrap">
+                                    <Paragraph>
+                                        Log issues and other requests on the GitHub page.
+                                        <Hyperlink NavigateUri="https://github.com/drasticactions/WinMasto">GitHub</Hyperlink>
+                                    </Paragraph>
+                                </RichTextBlock>
+
                                 <TextBlock Margin="0,30,0,0" Style="{StaticResource TitleTextBlockStyle}" Text="Main Developer:" />
 
                                 <RichTextBlock Margin="0,0,0,25" TextWrapping="Wrap">

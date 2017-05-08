@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="52978DrasticActions.WinMasto" Publisher="CN=49056560-3A92-41D0-8509-DF4FE44F646C" Version="1.3.0.0" />
+  <Identity Name="52978DrasticActions.WinMasto" Publisher="CN=49056560-3A92-41D0-8509-DF4FE44F646C" Version="1.4.1.0" />
   <mp:PhoneIdentity PhoneProductId="f8f06a47-33c7-4ae6-940c-22d3c4e56c1f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>WinMasto</DisplayName>
@@ -27,14 +27,14 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="WinMasto.BackgroundNotify.BackgroundNotifyStatus">
-          <BackgroundTasks>
-            <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="WinMasto.BackgroundNotify.ToastNotificationBackgroundTask">
           <BackgroundTasks>
             <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="WinMasto.BackgroundNotify.BackgroundNotifyStatus">
+          <BackgroundTasks>
+            <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
       </Extensions>

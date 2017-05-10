@@ -7,7 +7,7 @@ WinMasto is a UWP client for Mastodon, a GNU social-compatible federated social 
 <img src="http://i.imgur.com/LxxiWm3.png" width="400"> <img src="http://i.imgur.com/2y85gVY.png" width="400">
 
 
-It is currently not available in the store. However, debug builds from VSTS can be found on the Releases tab. You should be able to sideload these.
+You can download WinMasto from the [Windows Store](https://www.microsoft.com/store/apps/9p2zk5mb8v7f). You can also sideload debug versions by using the [Releases](https://github.com/drasticactions/WinMasto/releases) tab.
 
 ## Features
 

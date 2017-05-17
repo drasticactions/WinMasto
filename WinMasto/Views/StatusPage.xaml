@@ -299,7 +299,7 @@
             </controls1:PageHeader.Background>
         </controls1:PageHeader>
         <ProgressBar Grid.Row="1" IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" Height="10" Canvas.ZIndex="5" />
-        <Grid Grid.Row="1" VerticalAlignment="Stretch">
+        <Grid x:Name="StatusPageGrid" Grid.Row="1" VerticalAlignment="Stretch">
             <ListView 
                 IsItemClickEnabled="True"
                 SelectionMode="None"

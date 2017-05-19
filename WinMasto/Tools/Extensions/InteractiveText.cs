@@ -14,8 +14,18 @@ namespace WinMasto.Tools.Extensions
 {
     public static class HtmlRemoval
     {
-        public static string StripTagsCharArray(string source)
+        public static string StripTagsCharArray(string test)
         {
+            // Replace all inner paragraph blocks with newline.
+            string source;
+            try
+            {
+                source = new StringBuilder(test).Replace("</p>", "\r\n\r\n", 0, test.LastIndexOf("</p>")).ToString();
+            }
+            catch (Exception)
+            {
+                source = test;
+            }
             char[] array = new char[source.Length];
             int arrayIndex = 0;
             bool inside = false;

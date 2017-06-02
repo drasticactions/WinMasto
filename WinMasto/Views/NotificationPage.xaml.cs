@@ -117,6 +117,22 @@ namespace WinMasto.Views
             await ViewModel.NavigateToAccountPage(status.Account);
         }
 
+        private async void ShowAccountFromAvatar_OnClicked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var status = button?.CommandParameter as Status;
+            await ViewModel.NavigateToAccountPage(status.Account);
+        }
+
+        private async void ShowAccountFromAvatarViaAccount_OnClicked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+            var account = button?.CommandParameter as Account;
+            await ViewModel.NavigateToAccountPage(account);
+        }
+
         private async void ListView_RefreshCommand(object sender, EventArgs e)
         {
             await ViewModel.PullToRefreshNotifications();

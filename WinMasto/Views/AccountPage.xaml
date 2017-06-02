@@ -56,7 +56,9 @@
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image VerticalAlignment="Top" Height="50" Source="{Binding Reblog.Account.AvatarUrl}"/>
+                    <Button VerticalAlignment="Top" Click="ShowAccountFromAvatar_OnClicked" CommandParameter="{Binding Reblog}" Style="{ThemeResource AvatarButtonStyle}" Width="50" Height="50">
+                        <Image Height="50" Source="{Binding Reblog.Account.AvatarUrl}"/>
+                    </Button>
                     <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource MainPageBackground}" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>
@@ -164,7 +166,9 @@
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image VerticalAlignment="Top" Height="50" Source="{Binding Account.AvatarUrl}"/>
+                    <Button VerticalAlignment="Top" Click="ShowAccountFromAvatar_OnClicked" CommandParameter="{Binding}" Style="{ThemeResource AvatarButtonStyle}" Width="50" Height="50">
+                        <Image Height="50" Source="{Binding Account.AvatarUrl}"/>
+                    </Button>
                     <Grid x:Name="SpoilerNSFWGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource MainPageBackground}" Visibility="{Binding Converter={StaticResource SpoilerOrNSFWVisibilityConverter}}" Margin="5" Grid.Column="1" Canvas.ZIndex="1">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Converter={StaticResource SpoilerOrNSFWTextConverter}}"/>

@@ -133,7 +133,7 @@
                             </Button>
                             <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                 <StackPanel Orientation="Horizontal">
-                                    <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                    <SymbolIcon Symbol="OutlineStar" />
                                     <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
                                 </StackPanel>
                             </Button>
@@ -259,7 +259,7 @@
                             </Button>
                             <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                 <StackPanel Orientation="Horizontal">
-                                    <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                    <SymbolIcon Symbol="OutlineStar" />
                                     <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
                                 </StackPanel>
                             </Button>
@@ -404,7 +404,7 @@
                             </Button>
                             <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
                                 <StackPanel Orientation="Horizontal">
-                                    <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                    <SymbolIcon Symbol="OutlineStar" />
                                     <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding FavouritesCount}"></TextBlock>
                                 </StackPanel>
                             </Button>

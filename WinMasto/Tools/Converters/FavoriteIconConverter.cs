@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 using FontAwesome.UWP;
+using Windows.UI.Xaml.Controls;
 
 namespace WinMasto.Tools.Converters
 {
@@ -15,11 +16,11 @@ namespace WinMasto.Tools.Converters
             try
             {
                 var favorited = (bool) value;
-                return favorited ? FontAwesomeIcon.Star : FontAwesomeIcon.StarOutline;
+                return favorited ? Symbol.SolidStar : Symbol.OutlineStar;
             }
             catch (Exception e)
             {
-                return FontAwesomeIcon.StarOutline;
+                return Symbol.OutlineStar;
             }
         }
 

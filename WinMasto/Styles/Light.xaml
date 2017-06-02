@@ -7,6 +7,7 @@
     <Color x:Key="LoadingBackground">#FFFFFF</Color>
     <Color x:Key="StatusTextColor">#000000</Color>
     <Color x:Key="SystemAccentColor">White</Color>
+    <SolidColorBrush x:Key="SystemControlHyperlinkTextBrush">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonCheckedForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonHoverForegroundColor">Black</SolidColorBrush>

@@ -13,6 +13,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:WinMasto.Tools.Converters"
     xmlns:templateSelector="using:WinMasto.Tools.TemplateSelector"
+    xmlns:behaviors="using:Template10.Behaviors"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -32,73 +33,88 @@
         </DataTemplate>
         <templateSelector:MediaAttachmentTemplateSelector x:Name="MediaAttachmentTemplateSelector" ImageStatusDataTemplate="{StaticResource ImageDataTemplate}" VideoStatusDataTemplate="{StaticResource MediaDataTemplate}"></templateSelector:MediaAttachmentTemplateSelector>
     </UserControl.Resources>
-    <Grid Margin="25" x:Name="ImageControlGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MaxWidth="800" MaxHeight="700" VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <FlipView AllowFocusOnInteraction="True" ItemTemplateSelector="{StaticResource MediaAttachmentTemplateSelector}" ItemsSource="{Binding Status.MediaAttachments}">
-            </FlipView>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image VerticalAlignment="Top" Height="50" Source="{Binding Status.Account.AvatarUrl}"/>
-                <Grid Margin="5" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Status.Account.UserName}" FontWeight="Bold" />
-                        <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Status.Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
-                        <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding Status.CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
+    <Grid Margin="25" x:Name="ImageControlGrid" MaxWidth="800" MaxHeight="700" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="0">
+                <FlipView AllowFocusOnInteraction="True" ItemTemplateSelector="{StaticResource MediaAttachmentTemplateSelector}" ItemsSource="{Binding Status.MediaAttachments}">
+                </FlipView>
+            </Grid>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="1">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Top" Height="50" Source="{Binding Status.Account.AvatarUrl}"/>
+                    <Grid Margin="5" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{Binding Status.Account.UserName}" FontWeight="Bold" />
+                            <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{Binding Status.Account.AccountName, Converter={StaticResource AddAtSignConverter}}" />
+                            <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{Binding Status.CreatedAt, Converter={StaticResource CreatedTimeConverter}}" />
+                        </Grid>
+                        <Grid Margin="5" Grid.Row="1">
+                            <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Status.Content, Converter={StaticResource StripHtmlConverter}}"/>
+                        </Grid>
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="3">
+                            <Button Click="Reply_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
+                                <uwp:FontAwesome Icon="Reply" />
+                            </Button>
+                            <Button Click="ReShare_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="ReShare"/>
+                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.ReblogCount}"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
+                                    <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.FavouritesCount}"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
+                                <SymbolIcon Symbol="More"/>
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
+                                        <MenuFlyoutSeparator/>
+                                        <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding Status}" Text="Mention"/>
+                                        <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding Status}" Text="Mute"/>
+                                        <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding Status}" Text="Block"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
                     </Grid>
-                    <Grid Margin="5" Grid.Row="1">
-                        <TextBlock TextWrapping="Wrap" extensions:TextBlockExtension.FormattedText="{Binding Status.Content, Converter={StaticResource StripHtmlConverter}}"/>
-                    </Grid>
-                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Row="3">
-                        <Button Click="Reply_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="5,0,25,0" Background="Transparent">
-                            <uwp:FontAwesome Icon="Reply" />
-                        </Button>
-                        <Button Click="ReShare_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="ReShare"/>
-                                <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.ReblogCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.ReblogCount}"></TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="Favorite_OnClick" CommandParameter="{Binding Status}" Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                            <StackPanel Orientation="Horizontal">
-                                <uwp:FontAwesome Icon="{Binding Status.Favourited, Converter={StaticResource FavoriteIconConverter}}" />
-                                <TextBlock Margin="5,0,0,0" Visibility="{Binding Status.FavouritesCount, Converter={StaticResource CountVisibilityConverter}}" Text="{Binding Status.FavouritesCount}"></TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource StatusButtonStyle}" Margin="0,0,25,0" Background="Transparent">
-                            <SymbolIcon Symbol="More"/>
-                            <Button.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Click="ShowAccount_OnClick" CommandParameter="{Binding Reblog}" Text="Show Account"/>
-                                    <MenuFlyoutSeparator/>
-                                    <MenuFlyoutItem Click="Mention_OnClick" CommandParameter="{Binding Status}" Text="Mention"/>
-                                    <MenuFlyoutItem Click="Mute_OnClick" CommandParameter="{Binding Status}" Text="Mute"/>
-                                    <MenuFlyoutItem Click="Block_OnClick" CommandParameter="{Binding Status}" Text="Block"/>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                    </StackPanel>
                 </Grid>
             </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Button Margin="5,0,0,0" Background="Transparent" Foreground="{ThemeResource MainPageBackground}" FontSize="30" FontWeight="Bold" VerticalAlignment="Top" Style="{ThemeResource CloseButtonStyle}" Content="X">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <behaviors:CloseFlyoutAction/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

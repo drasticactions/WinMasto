@@ -41,6 +41,12 @@ namespace WinMasto.ViewModels
             set { _settings.BackgroundTile = value; base.RaisePropertyChanged(); }
         }
 
+        public bool AlwaysShowNSFW
+        {
+            get { return _settings.AlwaysShowNSFW; }
+            set { _settings.AlwaysShowNSFW = value; base.RaisePropertyChanged(); }
+        }
+
         public bool UseBackgroundNotify
         {
             get { return _settings.ToastNotifications; }

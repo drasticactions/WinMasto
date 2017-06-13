@@ -92,6 +92,15 @@ namespace WinMasto.Services
             }
         }
 
+        public bool AlwaysShowNSFW
+        {
+            get { return _helper.Read<bool>(nameof(AlwaysShowNSFW), false); }
+            set
+            {
+                _helper.Write(nameof(AlwaysShowNSFW), value);
+            }
+        }
+
         public bool ToastNotifications
         {
             get { return _helper.Read<bool>(nameof(ToastNotifications), false); }

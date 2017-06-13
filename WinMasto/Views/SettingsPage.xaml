@@ -67,6 +67,16 @@
                     </RelativePanel>
                 </ScrollViewer>
             </PivotItem>
+            <PivotItem Header="Posts" DataContext="{Binding SettingsPartViewModel}">
+                <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
+                    <RelativePanel HorizontalAlignment="Left">
+                        <ToggleSwitch x:Name="AlwaysShowNSFW" Header="Always Show NSFW/Content Warning Posts"
+                                      IsOn="{Binding AlwaysShowNSFW, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="AlwaysShowNSFWText" RelativePanel.Below="AlwaysShowNSFW" TextWrapping="Wrap">Instead of hiding NSFW messages, always show them.</TextBlock>
+                    </RelativePanel>
+                </ScrollViewer>
+            </PivotItem>
             <PivotItem Header="About">
                 <Grid DataContext="{Binding AboutPartViewModel}">
                     <ScrollViewer ZoomMode="Disabled">

@@ -13,6 +13,7 @@ namespace WinMasto.Tools.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (Services.SettingsService.Instance.AlwaysShowNSFW) return Visibility.Collapsed;
             var status = value as Status;
             if (status == null) return Visibility.Collapsed;
             return (status.Sensitive != null && status.Sensitive.Value) || !string.IsNullOrEmpty(status.SpoilerText) ? Visibility.Visible : Visibility.Collapsed;
@@ -45,6 +46,7 @@ namespace WinMasto.Tools.Converters
         {
             var status = value as Status;
             if (status == null) return 0;
+            if (Services.SettingsService.Instance.AlwaysShowNSFW) return 0;
             return (status.Sensitive != null && status.Sensitive.Value) || !string.IsNullOrEmpty(status.SpoilerText) ? 20 : 0;
         }
 

@@ -29,7 +29,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Name="MediaDataTemplate">
-            <MediaElement Source="{Binding Url}"></MediaElement>
+            <MediaElement IsLooping="True" Source="{Binding Url}"></MediaElement>
         </DataTemplate>
         <templateSelector:MediaAttachmentTemplateSelector x:Name="MediaAttachmentTemplateSelector" ImageStatusDataTemplate="{StaticResource ImageDataTemplate}" VideoStatusDataTemplate="{StaticResource MediaDataTemplate}"></templateSelector:MediaAttachmentTemplateSelector>
     </UserControl.Resources>

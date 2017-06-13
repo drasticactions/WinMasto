@@ -95,6 +95,14 @@ namespace WinMasto.Views
                 var grid = sender as AdaptiveGridView;
                 if (grid == null) return;
 
+                var inlineStatus = grid.DataContext as Status;
+                if (inlineStatus != null) {
+                    ImageGalleryView.ViewModel.SetStatus(inlineStatus, attachment);
+                    FlyoutBase flyoutBase2 = FlyoutBase.GetAttachedFlyout(StatusPageGrid);
+                    flyoutBase2.ShowAt(StatusPageGrid);
+                    return;
+                }
+
                 var status = grid.DataContext as StatusPageViewModel;
                 if (status == null) return;
                 ImageGalleryView.ViewModel.SetStatus(status.SelectedStatus, attachment);

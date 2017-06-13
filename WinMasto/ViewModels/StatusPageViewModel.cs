@@ -83,5 +83,26 @@ namespace WinMasto.ViewModels
             }
         }
 
+        public async Task ShowNSFWPost(Status status)
+        {
+            bool isSelectedStatus = this.SelectedStatus == status;
+
+            Status newStatus = status;
+            newStatus.Sensitive = false;
+            newStatus.SpoilerText = string.Empty;
+            if (Others != null)
+            {
+                var index = Others.IndexOf(status);
+                if (index >= 0)
+                {
+                    Others[index] = newStatus;
+                }
+            }
+            
+            if (isSelectedStatus)
+            {
+                this.SelectedStatus = newStatus;
+            }
+        }
     }
 }
